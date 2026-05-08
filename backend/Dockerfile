@@ -23,12 +23,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the entire backend application code
 COPY backend/ .
 
-# Copy startup script and make executable
-COPY backend/startup.sh /app/startup.sh
-RUN chmod +x /app/startup.sh
+# Copy startup script
+COPY backend/startup.py /app/startup.py
 
 # Expose the API port (Railway injects $PORT at runtime)
 EXPOSE 8001
 
-# Run migrations + seeds + start server
-CMD ["/app/startup.sh"]
+# Run migrations + seeds + start server (Python avoids CRLF shell issues)
+CMD ["python", "startup.py"]
