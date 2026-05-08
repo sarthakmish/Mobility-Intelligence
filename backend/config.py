@@ -88,7 +88,12 @@ class Settings(BaseSettings):
     def db_url(self) -> str:
         """Build database URL from individual components if not set directly."""
         if self.database_url:
-            return self.database_url
+            # Railway injects postgresql:// but asyncpg needs postgresql+asyncpg://
+            url = self.database_url
+            if url.startswith("postgresql://") or url.startswith("postgres://"):
+                url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+                url = url.replace("postgres://", "postgresql+asyncpg://", 1)
+            return url
         return (
             f"postgresql+asyncpg://{self.postgres_user}:{self.postgres_password}"
             f"@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"
