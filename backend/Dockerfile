@@ -3,17 +3,16 @@
 # Python 3.11 slim + FastAPI + AI Agent System
 # ============================================================
 
-FROM python:3.11-slim
+FROM python:3.11-slim-bullseye
 
 # Set working directory inside container
 WORKDIR /app
 
-# Install system dependencies needed for:
-# - asyncpg: PostgreSQL async driver (needs libpq-dev)
-# - httpx: HTTP client for LLM API calls
-# - lxml: XML parsing for web scraping
+# Install system dependencies:
+# - gcc: needed to compile lxml, asyncpg C extensions
+# - curl: healthcheck utility
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libpq-dev gcc curl \
+    gcc curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy and install Python dependencies first (Docker cache layer)
