@@ -1,0 +1,35 @@
+# ============================================================
+# MOBILITY INTELLIGENCE — Python Dependencies
+# ============================================================
+# PHILOSOPHY: Minimal dependencies, all well-known, corporate-safe
+# NO LangChain, NO LangGraph — plain Python + async
+# ============================================================
+
+# ── WEB FRAMEWORK ──────────────────────────────────────
+fastapi==0.115.0          # Async API framework with auto-docs
+uvicorn[standard]==0.30.0 # ASGI server for FastAPI
+pydantic==2.9.0           # Data validation (used by FastAPI)
+pydantic-settings==2.5.0  # Settings management from env vars
+
+# ── DATABASE ───────────────────────────────────────────
+asyncpg==0.29.0           # Async PostgreSQL driver (fastest)
+sqlalchemy[asyncio]==2.0.35  # ORM + async support
+alembic==1.13.0           # Database migrations
+
+# ── CACHE ──────────────────────────────────────────────
+redis[hiredis]==5.1.0     # Async Redis client with C parser
+
+# ── HTTP CLIENT (for LLM APIs + web scraping) ─────────
+httpx==0.27.0             # Modern async HTTP client
+
+# ── WEB SCRAPING ───────────────────────────────────────
+beautifulsoup4==4.12.3    # HTML parsing for news/data extraction
+lxml==5.3.0               # Fast XML/HTML parser backend
+
+# ── SCHEDULING ─────────────────────────────────────────
+apscheduler==3.10.4       # Lightweight task scheduler (cron-like)
+
+# ── UTILITIES ──────────────────────────────────────────
+python-dotenv==1.0.1      # Load .env files
+python-dateutil==2.9.0    # Date parsing for news articles
+tenacity==9.0.0           # Retry logic for LLM API calls

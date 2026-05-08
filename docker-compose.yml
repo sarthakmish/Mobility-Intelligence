@@ -1,0 +1,94 @@
+# ============================================================
+# MOBILITY SOLUTIONS INTELLIGENCE PLATFORM
+# Docker Compose — runs the full backend stack
+# ============================================================
+# Usage:
+#   docker-compose up -d          → Start all services
+#   docker-compose logs -f api    → Watch API logs
+#   docker-compose down           → Stop everything
+# ============================================================
+
+version: '3.8'
+
+services:
+  # ──────────────────────────────────────────────
+  # BACKEND API (FastAPI + Agent System)
+  # This is the brain — runs all AI agents,
+  # handles API requests, manages data pipeline
+  # ──────────────────────────────────────────────
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: mobility-api
+    ports:
+      - "8001:8001"
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      # Mount backend code for hot-reload during development
+      - ./backend:/app
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ──────────────────────────────────────────────
+  # POSTGRESQL — Primary data store
+  # Stores: PESTEL factors, technologies, scores,
+  #         source trails, validation logs
+  # ──────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: mobility-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: mobility_intelligence
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sarthak}
+    volumes:
+      # Persist data across container restarts
+      - pgdata:/var/lib/postgresql/data
+      # Run initial migration on first boot
+      - ./backend/db/migrations/001_initial.sql:/docker-entrypoint-initdb.d/001_initial.sql
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d mobility_intelligence"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ──────────────────────────────────────────────
+  # REDIS — Cache + Rate Limiting
+  # Caches: AI analysis results (TTL: 4 hrs),
+  #         API rate limits, session data
+  # ──────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: mobility-cache
+    ports:
+      - "6379:6379"
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redisdata:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+# Persistent volumes — survive container rebuilds
+volumes:
+  pgdata:
+    driver: local
+  redisdata:
+    driver: local

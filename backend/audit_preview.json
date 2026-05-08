@@ -1,0 +1,2631 @@
+{
+  "tech": [
+    {
+      "type": "tech_adjust",
+      "segment": "4W_PV",
+      "name": "ADAS L3+ LiDAR Systems",
+      "new_value": 20,
+      "reason": "Early-stage but relevant for premium/export PV segment"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "4W_PV",
+      "name": "Air Disc Brakes for HCV/Bus",
+      "reason": "Exclusively HCV/Bus segment, not passenger vehicles"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "4W_PV",
+      "name": "Hydrogen ICE / Fuel Cell Powertrain",
+      "new_value": 15,
+      "reason": "Early-stage pilot relevance for PV; minimal current volume"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "4W_PV",
+      "name": "Smart Grid / V2G Integration Platform",
+      "new_value": 10,
+      "reason": "Early-stage but relevant for 4W EV ecosystem development"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "LCV",
+      "name": "2W/3W EV Hub Motor System",
+      "reason": "Hub motors are 2W/3W specific, not LCV"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "48V Mild Hybrid (MHEV) System",
+      "new_value": 60,
+      "reason": "Emerging mild hybrid adoption in LCV segment"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "LCV",
+      "name": "5G Automotive Modem & C-V2X",
+      "reason": "Too nascent; minimal LCV deployment in India"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "ABS/ESC Electronic Braking Systems",
+      "new_value": 480,
+      "reason": "Mandatory safety regulation applies to LCVs"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "AC Home / Workplace Charging (3.3kW\u201322kW)",
+      "new_value": 56,
+      "reason": "Relevant for electric LCV depot charging"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "ADAS Front Radar / AEB Sensor",
+      "new_value": 90,
+      "reason": "Emerging ADAS fitment in premium LCV models"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "ADAS L2+ Camera Systems",
+      "new_value": 120,
+      "reason": "Camera ADAS applicable to LCV segment"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "LCV",
+      "name": "ADAS L3+ LiDAR Systems",
+      "reason": "LiDAR too advanced and costly for Indian LCVs"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "LCV",
+      "name": "Additive Manufacturing (3D Printing) for Tooling",
+      "reason": "Manufacturing process tool, not vehicle segment specific"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "AI-Powered Predictive Maintenance (Fleet)",
+      "new_value": 40,
+      "reason": "LCV fleets actively adopt predictive maintenance solutions"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "LCV",
+      "name": "AI Vision-Based Quality Inspection",
+      "reason": "Factory process technology, not LCV vehicle specific"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "LCV",
+      "name": "Air Disc Brakes for HCV/Bus",
+      "reason": "Explicitly HCV/Bus only, not applicable to LCV"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "Airbag ECU & Occupant Safety Systems",
+      "new_value": 180,
+      "reason": "Airbags increasingly mandated in LCV cabins"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "Automotive Cloud Platform & Data Monetisation",
+      "new_value": 6,
+      "reason": "Fleet data monetisation relevant for LCV operators"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "LCV",
+      "name": "Battery Swapping Networks (2W/3W)",
+      "reason": "Battery swapping is exclusively 2W/3W in India"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "Body Control Module (BCM) & Smart Access",
+      "new_value": 240,
+      "reason": "BCM standard in modern LCV electrical architecture"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "Bosch Aftermarket Digital Parts Platform",
+      "new_value": 102,
+      "reason": "LCV aftermarket is large and digitising rapidly"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "BS-VI Exhaust Aftertreatment (SCR + DPF)",
+      "new_value": 620,
+      "reason": "BS-VI diesel LCVs require SCR/DPF aftertreatment"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "LCV",
+      "name": "Collaborative Robots (Cobots) for Assembly",
+      "reason": "Manufacturing process tool, not LCV segment specific"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "Common Rail Diesel Injection (BS-VI)",
+      "new_value": 1800,
+      "reason": "Diesel CRDI dominates LCV powertrain in India"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "DC Fast Charging Infrastructure (\u226550kW)",
+      "new_value": 40,
+      "reason": "Electric LCVs need fast charging at depots"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "Driver Monitoring System (DMS) \u2014 Cabin Camera",
+      "new_value": 14,
+      "reason": "DMS relevant for commercial LCV fleet safety"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "eCall / Emergency Call & Crash Notification",
+      "new_value": 30,
+      "reason": "AIS-140 mandates emergency call in commercial vehicles"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "Electric Power Steering (EPS) Systems",
+      "new_value": 320,
+      "reason": "EPS widely adopted in LCV for fuel efficiency"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "Embedded Software / AUTOSAR ECU Development",
+      "new_value": 80,
+      "reason": "ECU software development underpins all LCV electronics"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "EV Battery Health & SoH Diagnostics",
+      "new_value": 3,
+      "reason": "Critical for electric LCV fleet battery management"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "EV Battery Management Systems (BMS)",
+      "new_value": 90,
+      "reason": "BMS essential for electric LCV battery packs"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "EV Battery Thermal Management System (TMS)",
+      "new_value": 60,
+      "reason": "TMS needed for LCV EV battery longevity"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "EV DC-DC Converter & On-Board Charger",
+      "new_value": 62,
+      "reason": "Core power electronics for electric LCV platforms"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "EV Heat Pump HVAC System",
+      "new_value": 40,
+      "reason": "Heat pump HVAC improves electric LCV range"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "EV High-Voltage Current & Isolation Sensors",
+      "new_value": 30,
+      "reason": "Safety sensors mandatory in electric LCV HV systems"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "EV Servicing Tools for Workshops",
+      "new_value": 16,
+      "reason": "Electric LCV servicing requires specialised workshop tools"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "EV Traction Motor & Inverter",
+      "new_value": 120,
+      "reason": "Core drivetrain for electric LCV segment growth"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "Fleet Management SaaS Platform",
+      "new_value": 180,
+      "reason": "LCV fleets are primary fleet management platform users"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "Fluid Pressure & Temperature Sensors",
+      "new_value": 76,
+      "reason": "Engine and brake fluid sensors standard in LCVs"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "Gasoline Direct Injection (GDI) & Turbo",
+      "new_value": 280,
+      "reason": "Petrol/CNG LCVs increasingly use GDI turbo engines"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "LCV",
+      "name": "Heavy-Duty EV Powertrain (eTruck / eBus)",
+      "reason": "Heavy-duty EV powertrain exceeds LCV GVW range"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "LCV",
+      "name": "Hydrogen ICE / Fuel Cell Powertrain",
+      "reason": "No commercial hydrogen LCV deployment in India yet"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "ICE Engine Thermal & EMS (Cooling Circuit)",
+      "new_value": 320,
+      "reason": "Engine thermal management critical for LCV ICE"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "In-Vehicle Infotainment (IVI) & HMI",
+      "new_value": 280,
+      "reason": "Touchscreen IVI increasingly offered in LCV cabins"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "LCV",
+      "name": "Industrial IoT / Factory Digitisation Platform",
+      "reason": "Factory digitisation tool, not LCV vehicle specific"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "LCV",
+      "name": "Industrial Precision Torque Tools (Assembly)",
+      "reason": "Assembly tooling, not an LCV vehicle technology"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "Integrated AEB Brake Actuator (iBooster)",
+      "new_value": 60,
+      "reason": "iBooster supports AEB integration in LCV platforms"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "Integrated E-Axle Drive System",
+      "new_value": 60,
+      "reason": "E-axle suits electric LCV compact drivetrain packaging"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "Lambda & NOx Exhaust Sensors",
+      "new_value": 280,
+      "reason": "BS-VI compliance mandates NOx/lambda sensors in LCVs"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "LCV",
+      "name": "Matrix LED / Adaptive Headlights",
+      "reason": "Premium lighting rarely fitted in cost-sensitive LCVs"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "MEMS Inertial Sensors (IMU / Accelerometers)",
+      "new_value": 42,
+      "reason": "IMU sensors used in LCV ABS, ESC, telematics"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "OBD-II Diagnostic Systems",
+      "new_value": 64,
+      "reason": "OBD mandatory for BS-VI LCV compliance and servicing"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "Over-The-Air (OTA) Software Update Platform",
+      "new_value": 30,
+      "reason": "OTA updates adopted by connected LCV platforms"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "Regenerative Braking Controller (EV/HEV)",
+      "new_value": 48,
+      "reason": "Regen braking essential for electric and hybrid LCVs"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "LCV",
+      "name": "Smart Grid / V2G Integration Platform",
+      "reason": "V2G infrastructure non-existent for Indian LCV market"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "TPMS (Tyre Pressure Monitoring System)",
+      "new_value": 60,
+      "reason": "TPMS adoption growing in LCV for safety compliance"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "Ultrasonic Parking Assist & Surround View",
+      "new_value": 80,
+      "reason": "Parking sensors relevant for urban delivery LCVs"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "LCV",
+      "name": "V2X Communication Module (C-V2X)",
+      "reason": "V2X infrastructure absent; no LCV deployment in India"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "Vehicle SOC (VSOC) Cybersecurity Services",
+      "new_value": 10,
+      "reason": "Connected LCV fleets require cybersecurity protection"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "Vehicle Telematics / Connected Vehicle Platform",
+      "new_value": 220,
+      "reason": "AIS-140 mandates telematics in all commercial LCVs"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "LCV",
+      "name": "Wireless / Inductive EV Charging (WPT)",
+      "reason": "Wireless charging not commercially viable for LCVs yet"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "LCV",
+      "name": "Workshop Diagnostic Scanners & Software",
+      "new_value": 34,
+      "reason": "Large LCV parc drives strong workshop diagnostics demand"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "HCV",
+      "name": "5G Automotive Modem & C-V2X",
+      "reason": "Too nascent; minimal HCV deployment in India today"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "HCV",
+      "name": "AC Home / Workplace Charging (3.3kW\u201322kW)",
+      "reason": "HCV EVs require DC fast charging, not AC home charging"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "HCV",
+      "name": "ADAS L3+ LiDAR Systems",
+      "reason": "LiDAR not commercially deployed in Indian HCV segment"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "HCV",
+      "name": "Electric Power Steering (EPS) Systems",
+      "reason": "HCV uses hydraulic power steering; EPS not suitable"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "HCV",
+      "name": "Gasoline Direct Injection (GDI) & Turbo",
+      "reason": "HCV segment is diesel-dominated; GDI not applicable"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "HCV",
+      "name": "Matrix LED / Adaptive Headlights",
+      "reason": "Premium lighting tech; negligible HCV adoption in India"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "HCV",
+      "name": "Smart Grid / V2G Integration Platform",
+      "reason": "V2G infrastructure non-existent for HCV in India"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "HCV",
+      "name": "V2X Communication Module (C-V2X)",
+      "reason": "V2X infrastructure absent; no real HCV deployment yet"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "HCV",
+      "name": "Wireless / Inductive EV Charging (WPT)",
+      "reason": "Wireless charging not viable for heavy HCV battery packs"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "2W",
+      "name": "48V Mild Hybrid (MHEV) System",
+      "reason": "2W use simple start-stop, not 48V mild hybrid architecture"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "2W",
+      "name": "5G Automotive Modem & C-V2X",
+      "reason": "2W lack connectivity hardware for 5G/C-V2X"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "2W",
+      "name": "AI-Powered Predictive Maintenance (Fleet)",
+      "reason": "2W fleet telematics too nascent for AI predictive maintenance"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "2W",
+      "name": "Airbag ECU & Occupant Safety Systems",
+      "reason": "Airbags not fitted in any production 2W in India"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "2W",
+      "name": "Automotive Cloud Platform & Data Monetisation",
+      "reason": "2W lack connected architecture for cloud data monetisation"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "2W",
+      "name": "Body Control Module (BCM) & Smart Access",
+      "reason": "2W use basic switches, no BCM or smart access systems"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "2W",
+      "name": "DC Fast Charging Infrastructure (\u226550kW)",
+      "reason": "2W batteries too small for 50kW+ DC fast charging"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "2W",
+      "name": "eCall / Emergency Call & Crash Notification",
+      "reason": "eCall not mandated or implemented in Indian 2W"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "2W",
+      "name": "Electric Power Steering (EPS) Systems",
+      "reason": "2W use handlebars; EPS not applicable to motorcycles/scooters"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "2W",
+      "name": "EV Heat Pump HVAC System",
+      "reason": "2W have no cabin; heat pump HVAC irrelevant"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "2W",
+      "name": "Gasoline Direct Injection (GDI) & Turbo",
+      "reason": "2W use port fuel injection; GDI/turbo not applicable"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "2W",
+      "name": "Integrated AEB Brake Actuator (iBooster)",
+      "reason": "AEB/iBooster is 4W ADAS tech; not used in 2W"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "2W",
+      "name": "Integrated E-Axle Drive System",
+      "reason": "E-axle is 4W architecture; 2W use hub motors instead"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "2W",
+      "name": "Matrix LED / Adaptive Headlights",
+      "reason": "Matrix LED too premium; 2W use basic LED headlamps"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "2W",
+      "name": "TPMS (Tyre Pressure Monitoring System)",
+      "reason": "TPMS not mandated or commonly fitted in Indian 2W"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "2W",
+      "name": "V2X Communication Module (C-V2X)",
+      "reason": "V2X infrastructure and 2W adoption non-existent in India"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "2W",
+      "name": "Vehicle SOC (VSOC) Cybersecurity Services",
+      "reason": "2W lack connected architecture requiring cybersecurity SOC"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "2W",
+      "name": "Wireless / Inductive EV Charging (WPT)",
+      "reason": "Wireless charging not commercially deployed for 2W India"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "48V Mild Hybrid (MHEV) System",
+      "reason": "3W uses CNG or full EV, no mild hybrid"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "5G Automotive Modem & C-V2X",
+      "reason": "No 5G/V2X deployment in 3W segment"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "ABS/ESC Electronic Braking Systems",
+      "reason": "ABS/ESC not mandated or used in 3W"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "Airbag ECU & Occupant Safety Systems",
+      "reason": "Airbags not fitted in Indian 3W vehicles"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "Automotive Cloud Platform & Data Monetisation",
+      "reason": "Too advanced; minimal connected infra in 3W"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "Body Control Module (BCM) & Smart Access",
+      "reason": "3W has basic electronics, no BCM/smart access"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "DC Fast Charging Infrastructure (\u226550kW)",
+      "reason": "3W batteries too small for 50kW+ fast charging"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "eCall / Emergency Call & Crash Notification",
+      "reason": "Not mandated or deployed in Indian 3W"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "Electric Power Steering (EPS) Systems",
+      "reason": "3W uses direct/mechanical steering, no EPS"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "Embedded Software / AUTOSAR ECU Development",
+      "reason": "AUTOSAR too complex for basic 3W electronics"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "EV Heat Pump HVAC System",
+      "reason": "3W auto-rickshaws have no cabin HVAC system"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "Fluid Pressure & Temperature Sensors",
+      "reason": "Minimal fluid systems in CNG/EV 3W drivetrains"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "Gasoline Direct Injection (GDI) & Turbo",
+      "reason": "3W uses CNG or EV, no petrol GDI engines"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "Integrated AEB Brake Actuator (iBooster)",
+      "reason": "AEB not applicable in 3W segment"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "Integrated E-Axle Drive System",
+      "reason": "3W uses hub motors, not integrated e-axle"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "Lambda & NOx Exhaust Sensors",
+      "reason": "No diesel in 3W; CNG sensors differ significantly"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "Matrix LED / Adaptive Headlights",
+      "reason": "Premium lighting not used in basic 3W"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "MEMS Inertial Sensors (IMU / Accelerometers)",
+      "reason": "No ADAS or stability systems requiring IMU in 3W"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "Over-The-Air (OTA) Software Update Platform",
+      "reason": "3W lacks connected architecture for OTA updates"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "TPMS (Tyre Pressure Monitoring System)",
+      "reason": "TPMS not mandated or used in 3W segment"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "V2X Communication Module (C-V2X)",
+      "reason": "No V2X infrastructure or mandate for 3W"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "Vehicle SOC (VSOC) Cybersecurity Services",
+      "reason": "3W lacks connected systems needing cybersecurity"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "3W",
+      "name": "Wireless / Inductive EV Charging (WPT)",
+      "reason": "WPT not practical or deployed for 3W segment"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "48V Mild Hybrid (MHEV) System",
+      "reason": "No hybrid systems in Indian tractors"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "ABS/ESC Electronic Braking Systems",
+      "reason": "Not mandated or used in tractors"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "AC Home / Workplace Charging (3.3kW\u201322kW)",
+      "reason": "No EV tractors in Indian market"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "AI-Powered Predictive Maintenance (Fleet)",
+      "reason": "Tractors lack connectivity for AI fleet tools"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "AI Vision-Based Quality Inspection",
+      "reason": "Manufacturing tool, not tractor-specific component"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "Airbag ECU & Occupant Safety Systems",
+      "reason": "No airbags fitted in Indian tractors"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "Body Control Module (BCM) & Smart Access",
+      "reason": "Tractors have no BCM or smart access"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "Bosch Aftermarket Digital Parts Platform",
+      "reason": "Not tractor-segment specific aftermarket platform"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "BS-VI Exhaust Aftertreatment (SCR + DPF)",
+      "reason": "Tractors exempt from BS-VI emission norms"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "Common Rail Diesel Injection (BS-VI)",
+      "reason": "Tractors use mechanical injection, not CRDI"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "eCall / Emergency Call & Crash Notification",
+      "reason": "No telematics or eCall mandate for tractors"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "Electric Power Steering (EPS) Systems",
+      "reason": "Tractors use mechanical or hydraulic steering"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "Embedded Software / AUTOSAR ECU Development",
+      "reason": "Tractors have minimal to no ECU software"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "EV Battery Health & SoH Diagnostics",
+      "reason": "No EV tractors in Indian market"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "EV Battery Management Systems (BMS)",
+      "reason": "No EV tractors in Indian market"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "EV Battery Thermal Management System (TMS)",
+      "reason": "No EV tractors in Indian market"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "EV DC-DC Converter & On-Board Charger",
+      "reason": "No EV tractors in Indian market"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "EV Heat Pump HVAC System",
+      "reason": "No EV tractors; tractors lack HVAC"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "EV High-Voltage Current & Isolation Sensors",
+      "reason": "No high-voltage EV systems in tractors"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "EV Servicing Tools for Workshops",
+      "reason": "No EV tractors requiring EV service tools"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "EV Traction Motor & Inverter",
+      "reason": "No EV tractors in Indian market"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "Fleet Management SaaS Platform",
+      "reason": "Tractors lack connectivity for SaaS platforms"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "Tractor",
+      "name": "Fluid Pressure & Temperature Sensors",
+      "new_value": 160,
+      "reason": "Used in tractor hydraulics and engine systems"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "Gasoline Direct Injection (GDI) & Turbo",
+      "reason": "Tractors are diesel; no GDI applicable"
+    },
+    {
+      "type": "tech_adjust",
+      "segment": "Tractor",
+      "name": "ICE Engine Thermal & EMS (Cooling Circuit)",
+      "new_value": 240,
+      "reason": "Diesel engine cooling essential for tractors"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "Industrial IoT / Factory Digitisation Platform",
+      "reason": "Manufacturing platform, not a tractor component"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "Industrial Precision Torque Tools (Assembly)",
+      "reason": "Assembly tool, not a tractor segment component"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "Integrated AEB Brake Actuator (iBooster)",
+      "reason": "No ADAS or AEB systems in tractors"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "Integrated E-Axle Drive System",
+      "reason": "No electric axle in diesel tractors"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "Lambda & NOx Exhaust Sensors",
+      "reason": "Tractors exempt from BS-VI; no NOx sensors"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "Matrix LED / Adaptive Headlights",
+      "reason": "Tractors use basic halogen lighting only"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "MEMS Inertial Sensors (IMU / Accelerometers)",
+      "reason": "No ADAS or stability systems in tractors"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "OBD-II Diagnostic Systems",
+      "reason": "OBD-II not mandated for Indian tractors"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "Over-The-Air (OTA) Software Update Platform",
+      "reason": "Tractors have no OTA-capable ECUs"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "Regenerative Braking Controller (EV/HEV)",
+      "reason": "No EV or hybrid powertrain in tractors"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "TPMS (Tyre Pressure Monitoring System)",
+      "reason": "TPMS not used or mandated in tractors"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "Vehicle Telematics / Connected Vehicle Platform",
+      "reason": "Tractors lack connected vehicle infrastructure"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "Wireless / Inductive EV Charging (WPT)",
+      "reason": "No EV tractors in Indian market"
+    },
+    {
+      "type": "tech_zero",
+      "segment": "Tractor",
+      "name": "Workshop Diagnostic Scanners & Software",
+      "reason": "Tractors use mechanical diagnostics, not ECU scanners"
+    }
+  ],
+  "pestel": [
+    {
+      "name": "EV penetration reaches 8% (CY2025) \u2014 inflection point",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "H",
+        "Tractor": "L"
+      },
+      "corrected_L": 7,
+      "corrected_I": 8,
+      "reasoning": "8% EV penetration is a trend projection, not confirmed; HCV electrification negligible."
+    },
+    {
+      "name": "Battery pack prices fall to $110/kWh (2025)",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "H",
+        "Tractor": "L"
+      },
+      "corrected_L": 7,
+      "corrected_I": 7,
+      "reasoning": "Price trajectory probable but not confirmed; HCV EV adoption still nascent in India."
+    },
+    {
+      "name": "BS-VI Stage 2 \u2014 OBD-II for 2W/3W, RDE for 4W (April 2025)",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "H",
+        "HCV": "H",
+        "2W": "H",
+        "3W": "H",
+        "Tractor": "L"
+      },
+      "corrected_L": 10,
+      "corrected_I": 8,
+      "reasoning": "Enacted mandate; Tractor exempt from BS-VI Stage 2 OBD-II/RDE scope."
+    },
+    {
+      "name": "Maruti Gujarat \u20b910,189 Cr Capacity Expansion \u2014 250K Unit Phase 1",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 9,
+      "corrected_I": 5,
+      "reasoning": "Single OEM 4W-only investment; \u20b910,189 Cr affects limited supplier base directly."
+    },
+    {
+      "name": "GST 2.0 PV demand surge \u2014 4.7M units FY26",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 6,
+      "corrected_I": 7,
+      "reasoning": "GST 2.0 reform speculative; demand surge affects 4W PV suppliers significantly if enacted."
+    },
+    {
+      "name": "New global OEM EV investments in India \u2014 multi-OEM EV platform proliferation",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 8,
+      "corrected_I": 6,
+      "reasoning": "Multi-OEM but early-stage; platform proliferation affects 4W component localisation meaningfully."
+    },
+    {
+      "name": "JLR Cyberattack \u2014 OEM Supply Chain Vulnerability Signal",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 9,
+      "corrected_I": 3,
+      "reasoning": "JLR is 4W-only; cyber risk signal, not direct financial impact on Indian component revenue."
+    },
+    {
+      "name": "AEB mandatory for 4W PV new models April 2026",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 9,
+      "corrected_I": 6,
+      "reasoning": "Mandate confirmed for 4W PV new models only; LCV/HCV not in April 2026 scope."
+    },
+    {
+      "name": "Honda '0 Alpha' EV \u2014 \u20b91,200 Cr India EV manufacturing investment",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 8,
+      "corrected_I": 3,
+      "reasoning": "Single OEM, \u20b91,200 Cr is small relative to \u20b96.73L Cr industry; 4W PV only."
+    },
+    {
+      "name": "EV 4W FY26 Sales +82% \u2014 Accelerated Electrification Signal",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 9,
+      "corrected_I": 6,
+      "reasoning": "82% growth on low base; meaningful for 4W EV component suppliers, limited cross-segment spill."
+    },
+    {
+      "name": "US 25-50% tariffs reduced to 18% (Feb 2026)",
+      "corrected_segments": {
+        "4W_PV": "M",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "M",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 7,
+      "corrected_I": 5,
+      "reasoning": "India auto exports to US are modest; tariff reduction helps but exposure limited in absolute terms."
+    },
+    {
+      "name": "PV Market FY26 \u2014 4.7M Units Double-Digit H2 Growth",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 8,
+      "corrected_I": 7,
+      "reasoning": "4.7M units confirmed trajectory; directly boosts 4W component demand across supplier tiers."
+    },
+    {
+      "name": "India-EU FTA signed January 2026",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "L",
+        "2W": "M",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 7.0,
+      "corrected_I": 6.0,
+      "reasoning": "FTA unconfirmed; primarily benefits PV exports; HCV not EU-export-oriented."
+    },
+    {
+      "name": "Gig economy driving 3W EV fleet electrification",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "M",
+        "HCV": "L",
+        "2W": "M",
+        "3W": "H",
+        "Tractor": "L"
+      },
+      "corrected_L": 9.0,
+      "corrected_I": 4.0,
+      "reasoning": "3W EV already 55% share; LCV/2W gig delivery secondary; small market size."
+    },
+    {
+      "name": "AEBS mandatory for all new HCV from April 2025",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "H",
+        "HCV": "H",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 10.0,
+      "corrected_I": 5.0,
+      "reasoning": "Enacted mandate; LCV also covered; affects \u20b910,000-30,000 Cr component subset."
+    },
+    {
+      "name": "CAFE III norms (FY2027): 91 g CO2/km fleet average",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "H",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 8.0,
+      "corrected_I": 7.0,
+      "reasoning": "CAFE applies only to PV and LCV; HCV/2W/3W excluded by regulation."
+    },
+    {
+      "name": "Software-defined vehicle architecture \u2014 OTA updates standard by 2027",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 7.0,
+      "corrected_I": 6.0,
+      "reasoning": "Consumer 4W PV feature only; fleet telematics differs; 2027 timeline uncertain."
+    },
+    {
+      "name": "Auto Component Industry H1 FY26 Growth at 6.8% \u2014 Moderating Momentum",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "M",
+        "2W": "H",
+        "3W": "M",
+        "Tractor": "M"
+      },
+      "corrected_L": 10.0,
+      "corrected_I": 7.0,
+      "reasoning": "Reported actuals; industry-wide but moderating signals broad \u20b950,000+ Cr impact."
+    },
+    {
+      "name": "Premiumisation trend \u2014 Tier 2/3 city middle class upgrading",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "M",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 8.0,
+      "corrected_I": 6.0,
+      "reasoning": "Primarily PV SUV content upgrade; 2W premiumisation secondary but real."
+    },
+    {
+      "name": "Ethanol blending programme \u2014 E20 mandate driving fuel system recalibration",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "H",
+        "HCV": "M",
+        "2W": "H",
+        "3W": "M",
+        "Tractor": "H"
+      },
+      "corrected_L": 9.0,
+      "corrected_I": 7.0,
+      "reasoning": "E20 mandate confirmed; affects all ICE segments; tractor diesel blend separate track."
+    },
+    {
+      "name": "Maruti SUV Expansion \u2014 7 New Models, 19.6% Share",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 9.0,
+      "corrected_I": 5.0,
+      "reasoning": "Single OEM; 4W PV only; significant but not industry-wide; \u20b910,000-30,000 Cr range."
+    },
+    {
+      "name": "FTA Rules of Origin \u2014 40-50% local value addition requirement",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "L",
+        "2W": "M",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 8.0,
+      "corrected_I": 6.0,
+      "reasoning": "Primarily PV export-linked; HCV not FTA-export-driven; LCV/2W moderate exposure."
+    },
+    {
+      "name": "Maruti SUV push \u2014 7 new models driving premium content demand",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 9.0,
+      "corrected_I": 5.0,
+      "reasoning": "Duplicate of Maruti SUV Expansion; single OEM 4W only; same calibration applies."
+    },
+    {
+      "name": "M&M Rises to 2nd in 4W EV \u2014 Multi-OEM EV PV Competition Intensifies",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 9.0,
+      "corrected_I": 5.0,
+      "reasoning": "4W EV PV competition; single segment; \u20b910,000-30,000 Cr EV component subset affected."
+    },
+    {
+      "name": "FAME III \u2014 \u20b92,671 Cr for EV charging (FY2025-27)",
+      "corrected_segments": {
+        "4W_PV": "M",
+        "LCV": "M",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "H",
+        "Tractor": "L"
+      },
+      "corrected_L": 9,
+      "corrected_I": 5,
+      "reasoning": "Charging infra boosts 2W/3W EV adoption most; \u20b92,671 Cr limited industry-wide impact."
+    },
+    {
+      "name": "TREM V emission norms mandatory from Oct 2025 for tractors >50 HP",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "H"
+      },
+      "corrected_L": 9,
+      "corrected_I": 4,
+      "reasoning": "Tractor-only mandate; >50HP subset limits market impact to sub-\u20b910,000 Cr."
+    },
+    {
+      "name": "Legacy OEMs Gaining EV 2W Share \u2014 Ola Electric Slips",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 8,
+      "corrected_I": 5,
+      "reasoning": "2W-only market share shift; 3W unaffected; component mix change moderate."
+    },
+    {
+      "name": "FY26 Best-Ever Auto Industry Performance \u2014 GST Cut & Monsoon Tailwind",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "H",
+        "HCV": "H",
+        "2W": "H",
+        "3W": "H",
+        "Tractor": "H"
+      },
+      "corrected_L": 7,
+      "corrected_I": 8,
+      "reasoning": "Broad industry tailwind across all segments; GST cut and monsoon are probabilistic."
+    },
+    {
+      "name": "Maruti \u20b910,189 Cr Gujarat Expansion \u2014 PV Volume & Content Uplift",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 9,
+      "corrected_I": 6,
+      "reasoning": "Single OEM 4W-only investment; significant but not industry-wide impact."
+    },
+    {
+      "name": "Hero-Honda 2W Volume War \u2014 Component Demand Surge",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 8,
+      "corrected_I": 6,
+      "reasoning": "Two dominant OEMs drive 2W component surge; segment-confined but large volume."
+    },
+    {
+      "name": "Euro 7 RDE compliance for India-manufactured exports (July 2025)",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "H",
+        "HCV": "M",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 8,
+      "corrected_I": 6,
+      "reasoning": "Export-facing 4W/LCV most affected; HCV exports to EU minimal; 2W/3W negligible."
+    },
+    {
+      "name": "E-2W FY26 Sales +20.5% \u2014 Sustained Electrification, Slowing Momentum",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "M",
+        "Tractor": "L"
+      },
+      "corrected_L": 8,
+      "corrected_I": 5,
+      "reasoning": "2W EV growth confirmed trend; 3W indirectly influenced; still sub-\u20b950,000 Cr impact."
+    },
+    {
+      "name": "India auto component exports reach $22.9B (FY2025)",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "H",
+        "HCV": "M",
+        "2W": "M",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 10,
+      "corrected_I": 8,
+      "reasoning": "Already achieved fact; 4W/LCV dominate export mix; HCV/2W moderate share."
+    },
+    {
+      "name": "India GDP growth 6.4% (FY2025) \u2014 auto sector tailwind",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "M",
+        "2W": "H",
+        "3W": "M",
+        "Tractor": "M"
+      },
+      "corrected_L": 10,
+      "corrected_I": 7,
+      "reasoning": "Confirmed GDP data; broad demand tailwind but indirect auto linkage moderates impact."
+    },
+    {
+      "name": "Ola Electric \u20b92,000 Cr battery arm fundraise \u2014 cell localisation acceleration",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 8,
+      "corrected_I": 4,
+      "reasoning": "Single company 2W-focused; cell localisation early-stage; limited near-term industry impact."
+    },
+    {
+      "name": "Bharat NCAP 5-star target mandatory by 2028",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 8,
+      "corrected_I": 6,
+      "reasoning": "PV-only safety mandate; drives safety component content uplift worth \u20b910,000-50,000 Cr."
+    },
+    {
+      "name": "E-bus/truck localisation deadline extension \u2014 traction motor supply window",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "M",
+        "HCV": "H",
+        "2W": "L",
+        "3W": "M",
+        "Tractor": "L"
+      },
+      "corrected_L": 8.0,
+      "corrected_I": 6.0,
+      "reasoning": "E-bus/truck only; LCV e-vans emerging; traction motor market ~\u20b915,000Cr."
+    },
+    {
+      "name": "West Asia Conflict \u2014 Fuel Price Surge & Rupee Depreciation Risk",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "H",
+        "HCV": "H",
+        "2W": "H",
+        "3W": "H",
+        "Tractor": "M"
+      },
+      "corrected_L": 7.0,
+      "corrected_I": 8.0,
+      "reasoning": "Fuel price surge hits all motorised segments; tractor diesel indirect."
+    },
+    {
+      "name": "PM Gati Shakti: Rs.11.1L Cr infra investment accelerating LCV/HCV demand",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "H",
+        "HCV": "H",
+        "2W": "L",
+        "3W": "M",
+        "Tractor": "M"
+      },
+      "corrected_L": 8.0,
+      "corrected_I": 8.0,
+      "reasoning": "Infra drives freight CVs directly; 3W cargo and tractors moderately benefit."
+    },
+    {
+      "name": "Automotive Cybersecurity \u2014 OEM Procurement Urgency Post-JLR",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 7.0,
+      "corrected_I": 5.0,
+      "reasoning": "JLR is 4W only; single OEM event, not industry-wide mandate."
+    },
+    {
+      "name": "India Automotive Mission Plan 2047 \u2014 50M Vehicle Production Target",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "H",
+        "HCV": "H",
+        "2W": "H",
+        "3W": "H",
+        "Tractor": "H"
+      },
+      "corrected_L": 6.0,
+      "corrected_I": 8.0,
+      "reasoning": "Aspirational policy, not enacted; broad impact but long horizon reduces certainty."
+    },
+    {
+      "name": "Honda India 2W EV Facility 2028 \u2014 Platform Supply Opportunity",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 7.0,
+      "corrected_I": 5.0,
+      "reasoning": "Single OEM, 2W only; announced but 2028 timeline adds uncertainty; ~\u20b910,000Cr."
+    },
+    {
+      "name": "UN R155 vehicle cybersecurity mandatory for new type approvals",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "M",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 8.0,
+      "corrected_I": 6.0,
+      "reasoning": "Mandate confirmed for connected vehicles; 2W/3W/tractor largely non-connected."
+    },
+    {
+      "name": "Global oil price surge driving ethanol blending \u2014 flex-fuel powertrain demand",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "M",
+        "Tractor": "H"
+      },
+      "corrected_L": 7.0,
+      "corrected_I": 7.0,
+      "reasoning": "E20/flex-fuel policy active; HCV diesel-dominant, minimal ethanol applicability."
+    },
+    {
+      "name": "Multi-OEM EV platform proliferation \u2014 software fragmentation risk",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "L",
+        "2W": "M",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 8.0,
+      "corrected_I": 6.0,
+      "reasoning": "4W EV software complexity highest; HCV EV nascent; 3W/tractor minimal software."
+    },
+    {
+      "name": "Exicom \u20b9216 Cr Hyderabad plant \u2014 domestic EVSE competition intensifies",
+      "corrected_segments": {
+        "4W_PV": "M",
+        "LCV": "M",
+        "HCV": "L",
+        "2W": "M",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 9.0,
+      "corrected_I": 4.0,
+      "reasoning": "Single company \u20b9216Cr investment; EVSE affects charger suppliers, not all segments."
+    },
+    {
+      "name": "Connected car features now expected even in sub-\u20b910L segment",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 9.0,
+      "corrected_I": 6.0,
+      "reasoning": "Consumer 4W PV feature only per rules; fleet telematics excluded from definition."
+    },
+    {
+      "name": "EV Market 10M Annual Sales by 2030 \u2014 Electrification Scale Projection",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "M",
+        "2W": "H",
+        "3W": "H",
+        "Tractor": "L"
+      },
+      "corrected_L": 6.0,
+      "corrected_I": 9.0,
+      "reasoning": "Projection not mandate; 10M EVs would reshape >30% of industry if achieved."
+    },
+    {
+      "name": "EU CBAM \u2014 carbon declarations for metal-intensive exports",
+      "corrected_segments": {
+        "4W_PV": "M",
+        "LCV": "H",
+        "HCV": "H",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 9.0,
+      "corrected_I": 6.0,
+      "reasoning": "LCV/HCV are metal-intensive export segments; 4W_PV partial export exposure only."
+    },
+    {
+      "name": "Extreme heat events stressing EV thermal management requirements",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "H",
+        "HCV": "M",
+        "2W": "H",
+        "3W": "H",
+        "Tractor": "L"
+      },
+      "corrected_L": 8.0,
+      "corrected_I": 6.0,
+      "reasoning": "LCV EV adoption rising rapidly; HCV EV nascent so medium; Tractor EV negligible."
+    },
+    {
+      "name": "Hero-Honda 2W Market Share Battle Intensifies",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 7.0,
+      "corrected_I": 5.0,
+      "reasoning": "OEM-specific rivalry confined to 2W; component suppliers face pricing pressure indirectly."
+    },
+    {
+      "name": "ADAS L3 radar/LiDAR ecosystem maturing in India by 2027",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "M",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 6.0,
+      "corrected_I": 6.0,
+      "reasoning": "L3 ADAS primarily premium 4W_PV; HCV highway trucks emerging; LCV/2W/3W not relevant."
+    },
+    {
+      "name": "FY26 Record PV Sales Amid Gas Shortage \u2014 Supply-Side Geopolitical Risk",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "M",
+        "Tractor": "L"
+      },
+      "corrected_L": 6.0,
+      "corrected_I": 6.0,
+      "reasoning": "Gas shortage hits CNG-heavy 3W/LCV moderately; HCV diesel-dominant so minimal impact."
+    },
+    {
+      "name": "Government \u20b97,280 Cr Rare Earth Magnet Scheme \u2014 Domestic Supply Chain",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "H",
+        "HCV": "M",
+        "2W": "H",
+        "3W": "H",
+        "Tractor": "L"
+      },
+      "corrected_L": 7.0,
+      "corrected_I": 7.0,
+      "reasoning": "EV motors across 4W/LCV/2W/3W benefit directly; HCV EV nascent; Tractor diesel-only."
+    },
+    {
+      "name": "Direct-to-Garage Aftermarket Platforms Disrupting Traditional Distribution",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "M",
+        "Tractor": "L"
+      },
+      "corrected_L": 7.0,
+      "corrected_I": 6.0,
+      "reasoning": "4W_PV and 2W dominate aftermarket volume; HCV uses OEM-dealer networks predominantly."
+    },
+    {
+      "name": "FAME Subsidy Extension Sought for 2W/3W \u2014 Policy Continuity Risk",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "H",
+        "Tractor": "L"
+      },
+      "corrected_L": 7.0,
+      "corrected_I": 6.0,
+      "reasoning": "FAME explicitly targets 2W/3W EV; discontinuity risks demand collapse in those segments."
+    },
+    {
+      "name": "Road safety awareness driving ADAS adoption in mid-segment",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 7.0,
+      "corrected_I": 5.0,
+      "reasoning": "Mid-segment ADAS is consumer 4W_PV trend only; CV/2W/3W not addressable near-term."
+    },
+    {
+      "name": "Vehicle scrappage policy accelerating fleet renewal (FY2025)",
+      "corrected_segments": {
+        "4W_PV": "M",
+        "LCV": "H",
+        "HCV": "H",
+        "2W": "L",
+        "3W": "H",
+        "Tractor": "L"
+      },
+      "corrected_L": 8.0,
+      "corrected_I": 7.0,
+      "reasoning": "Scrappage targets old commercial fleets; LCV/HCV/3W most affected; 4W_PV minor; 2W excluded."
+    },
+    {
+      "name": "Honda India 2W Global Hub Strategy \u2014 Export Platform Implications",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 8.0,
+      "corrected_I": 5.0,
+      "reasoning": "Single OEM export strategy; boosts 2W component suppliers but not industry-wide impact."
+    },
+    {
+      "name": "Euler Motors \u20b9437.5 Cr Raise \u2014 Electric LCV Segment Acceleration",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "H",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 8.0,
+      "corrected_I": 4.0,
+      "reasoning": "Single company raise; LCV EV signal relevant but \u20b9437.5 Cr too small for broad impact."
+    },
+    {
+      "name": "Lightweighting & NVH Solutions Demand \u2014 EV Transition Material Shift",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 7,
+      "corrected_I": 6,
+      "reasoning": "EV lightweighting primarily 4W_PV; HCV/2W/3W minimal structural redesign pressure."
+    },
+    {
+      "name": "Ethanol Blending E20 \u2014 Fuel System Recalibration Aftermarket Demand",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "H",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "L",
+        "Tractor": "H"
+      },
+      "corrected_L": 9,
+      "corrected_I": 7,
+      "reasoning": "E20 mandate enacted; HCV runs diesel, 3W mostly CNG/EV, excluded."
+    },
+    {
+      "name": "Ather EL Platform Sub-\u20b91L Scooter \u2014 Mass-Market EV Price Compression",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 6,
+      "corrected_I": 5,
+      "reasoning": "Single OEM scooter platform; 3W unaffected; industry impact limited to 2W."
+    },
+    {
+      "name": "BYD India Premium EV Push \u2014 Network Expansion to 48 Outlets",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 7,
+      "corrected_I": 4,
+      "reasoning": "Single OEM, 48 outlets is niche; premium segment only, limited industry impact."
+    },
+    {
+      "name": "Domestic EV charger manufacturing scale-up \u2014 localisation cost reduction",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "L",
+        "2W": "M",
+        "3W": "M",
+        "Tractor": "L"
+      },
+      "corrected_L": 7,
+      "corrected_I": 5,
+      "reasoning": "Charger localisation aids 4W/2W/3W EV adoption; HCV charging infrastructure nascent."
+    },
+    {
+      "name": "OEM Vehicle Price Increases \u2014 Input Cost Pass-Through Pressure",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "H",
+        "HCV": "H",
+        "2W": "H",
+        "3W": "M",
+        "Tractor": "M"
+      },
+      "corrected_L": 8,
+      "corrected_I": 7,
+      "reasoning": "Price increases affect all volume segments; 2W highly price-sensitive, must be H."
+    },
+    {
+      "name": "PLI scheme \u20b935,657 Cr invested, \u20b92,322 Cr disbursed",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 8,
+      "corrected_I": 6,
+      "reasoning": "PLI targets advanced auto components and EV; disbursement low, impact moderate."
+    },
+    {
+      "name": "India PV Sub-\u20b910L Segment Rebound \u2014 Entry-Level Electronics Content",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 7,
+      "corrected_I": 5,
+      "reasoning": "Strictly 4W_PV entry segment; electronics content uplift moderate, not cross-segment."
+    },
+    {
+      "name": "Multi-OEM SUV Platform Proliferation \u2014 ADAS Content Standardisation Pressure",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 7,
+      "corrected_I": 6,
+      "reasoning": "ADAS standardisation is 4W_PV SUV-specific; no meaningful CV or 2W relevance."
+    },
+    {
+      "name": "Semiconductor supply chain normalised post-2023 shortage",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "M",
+        "2W": "M",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 9,
+      "corrected_I": 6,
+      "reasoning": "Normalisation confirmed; 4W most semiconductor-intensive; tractors/3W minimally affected."
+    },
+    {
+      "name": "Maruti IT/Tech Leadership Reshuffle \u2014 Digital Procurement Signal",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 7,
+      "corrected_I": 3,
+      "reasoning": "Single OEM internal reshuffle; Maruti-only 4W signal; industry impact minimal."
+    },
+    {
+      "name": "Product liability framework for ADAS failures \u2014 legal uncertainty",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 6,
+      "corrected_I": 5,
+      "reasoning": "ADAS liability framework still evolving; affects 4W_PV only; framework not yet enacted."
+    },
+    {
+      "name": "CV Financing Stress \u2014 Fuel Cost Pass-Through & Trip Reduction",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "H",
+        "HCV": "H",
+        "2W": "L",
+        "3W": "M",
+        "Tractor": "L"
+      },
+      "corrected_L": 8,
+      "corrected_I": 6,
+      "reasoning": "CV financing stress is confirmed ongoing; segments correctly assigned per rules."
+    },
+    {
+      "name": "Flex-fuel engine mandate creating dual-fuel powertrain component demand",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "M",
+        "Tractor": "L"
+      },
+      "corrected_L": 7,
+      "corrected_I": 6,
+      "reasoning": "Flex-fuel mandate targets 4W and 2W primarily; HCV diesel fleet largely excluded."
+    },
+    {
+      "name": "OEM digital infrastructure vulnerability \u2014 supply chain cyber risk",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "M",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 7,
+      "corrected_I": 5,
+      "reasoning": "Cyber risk hits digitally integrated OEMs; 2W/3W/Tractor supply chains remain largely manual."
+    },
+    {
+      "name": "Corporate fleet sustainability mandates \u2014 30% EV by 2027",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "H",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 6,
+      "corrected_I": 5,
+      "reasoning": "Corporate fleets are 4W and LCV; 2027 target is aspirational, not legislated mandate."
+    },
+    {
+      "name": "AI/ML predictive diagnostics replacing scheduled maintenance",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "M",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 6,
+      "corrected_I": 5,
+      "reasoning": "AI diagnostics relevant only where connected telematics exist; 2W/3W/Tractor largely excluded."
+    },
+    {
+      "name": "Maruti IT Leadership Expansion \u2014 OEM Digital Integration Acceleration",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 8,
+      "corrected_I": 4,
+      "reasoning": "Single OEM action; Maruti operates only in 4W PV; limited industry-wide financial impact."
+    },
+    {
+      "name": "TVS Family Governance Dispute \u2014 Sundaram Clayton Leadership Risk",
+      "corrected_segments": {
+        "4W_PV": "M",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 7,
+      "corrected_I": 4,
+      "reasoning": "TVS/Sundaram Clayton primarily serves 2W; governance risk is company-specific, not industry-wide."
+    },
+    {
+      "name": "Small car segment rebound under GST 2.0 \u2014 entry-level content opportunity",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 7,
+      "corrected_I": 5,
+      "reasoning": "GST 2.0 small car relief is speculative; affects 4W PV only; entry-level content uplift moderate."
+    },
+    {
+      "name": "India DPDP Act 2023 \u2014 vehicle data privacy compliance",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 8,
+      "corrected_I": 4,
+      "reasoning": "DPDP applies to connected vehicles only; practically 4W PV; compliance cost impact is limited."
+    },
+    {
+      "name": "INR/USD at \u20b984 \u2014 export competitiveness vs import cost risk",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "M",
+        "2W": "M",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 8,
+      "corrected_I": 6,
+      "reasoning": "Currency affects exporters and import-dependent OEMs; 4W most exposed; 3W/Tractor minimal forex linkage."
+    },
+    {
+      "name": "OEM Cyberattack Supply Chain Disruption \u2014 Revenue Concentration Risk",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "M",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 6,
+      "corrected_I": 5,
+      "reasoning": "Mirrors digital vulnerability factor; 2W/3W/Tractor supply chains not digitally integrated enough."
+    },
+    {
+      "name": "Suzuki Burgman 125cc Refresh \u2014 ICE Scooter Segment Premiumisation",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 9,
+      "corrected_I": 3,
+      "reasoning": "Single model refresh by one OEM; 2W only; premium scooter sub-segment is sub-\u20b95,000 Cr impact."
+    },
+    {
+      "name": "Autoverse Direct-to-Garage Model \u2014 Aftermarket Disintermediation Risk",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "M",
+        "Tractor": "L"
+      },
+      "corrected_L": 6.0,
+      "corrected_I": 4.0,
+      "reasoning": "Aftermarket startup; HCV workshops are specialized, not garage-served; limited scale impact."
+    },
+    {
+      "name": "VinFast India 7-Seater EV MPV Launch \u2014 New OEM Demand Node",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 5.0,
+      "corrected_I": 3.0,
+      "reasoning": "Single unproven OEM entry; 4W only; VinFast India volumes negligible near-term."
+    },
+    {
+      "name": "Agri mechanisation driving precision farming tractor demand",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "H"
+      },
+      "corrected_L": 7.0,
+      "corrected_I": 4.0,
+      "reasoning": "Tractor-only trend; 10.6L unit market; precision farming still nascent in India."
+    },
+    {
+      "name": "Fuel Shortage Fear-Driven EV Demand \u2014 Demand Volatility Risk",
+      "corrected_segments": {
+        "4W_PV": "M",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "M",
+        "Tractor": "L"
+      },
+      "corrected_L": 5.0,
+      "corrected_I": 4.0,
+      "reasoning": "Fear-driven demand is speculative; 2W EV most sensitive; LCV/HCV unaffected."
+    },
+    {
+      "name": "Exicom EVSE Export Ambition \u2014 India as Global Charger Hub",
+      "corrected_segments": {
+        "4W_PV": "M",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 6.0,
+      "corrected_I": 3.0,
+      "reasoning": "Single company export ambition; charger components niche; minimal segment-wide impact."
+    },
+    {
+      "name": "Maruti IT/Technology Leadership Consolidation \u2014 Digital Procurement Signal",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 8.0,
+      "corrected_I": 3.0,
+      "reasoning": "Maruti-only digital procurement shift; 4W suppliers affected; industry impact limited."
+    },
+    {
+      "name": "JSW Motors entry \u2014 new domestic OEM adds component demand",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 5.0,
+      "corrected_I": 3.0,
+      "reasoning": "JSW Motors still pre-launch; 4W only; volumes and timeline highly uncertain."
+    },
+    {
+      "name": "Hydrogen fuel cell pilots in HCV \u2014 Tata/Ashok Leyland trials 2025",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "L",
+        "HCV": "H",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 6.0,
+      "corrected_I": 3.0,
+      "reasoning": "Pilot stage only; HCV-exclusive; commercial scale years away, impact minimal now."
+    },
+    {
+      "name": "India Carbon Credit Trading Scheme (CCTS) \u2014 BEE notification 2025",
+      "corrected_segments": {
+        "4W_PV": "M",
+        "LCV": "M",
+        "HCV": "H",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "M"
+      },
+      "corrected_L": 7.0,
+      "corrected_I": 5.0,
+      "reasoning": "BEE notified; HCV manufacturing most carbon-intensive; 2W/3W plants below threshold."
+    },
+    {
+      "name": "Maruti Rail Logistics Scale-Up \u2014 OEM Supply Chain Resilience Signal",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 7.0,
+      "corrected_I": 3.0,
+      "reasoning": "Maruti-specific logistics; affects 4W supply chain only; no cross-segment relevance."
+    },
+    {
+      "name": "Renault Duster relaunch \u2014 mid-SUV segment volume recovery signal",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 7.0,
+      "corrected_I": 3.0,
+      "reasoning": "Single model relaunch; 4W mid-SUV only; component demand incremental not transformative."
+    },
+    {
+      "name": "State government EV investment competition \u2014 manufacturing location risk",
+      "corrected_segments": {
+        "4W_PV": "H",
+        "LCV": "M",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "L",
+        "Tractor": "L"
+      },
+      "corrected_L": 7.0,
+      "corrected_I": 5.0,
+      "reasoning": "EV manufacturing incentives primarily target 4W and 2W; HCV EV investment minimal."
+    },
+    {
+      "name": "Bajaj Auto Leadership Continuity \u2014 5-Year ED Reappointment",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "H",
+        "3W": "H",
+        "Tractor": "L"
+      },
+      "corrected_L": 9.0,
+      "corrected_I": 4.0,
+      "reasoning": "Bajaj operates 2W+3W only; reappointment confirmed, single-OEM impact limited."
+    },
+    {
+      "name": "Atul Auto board strengthening \u2014 3W EV governance and tech upgrade signal",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "H",
+        "Tractor": "L"
+      },
+      "corrected_L": 6.0,
+      "corrected_I": 2.0,
+      "reasoning": "Atul Auto is niche 3W player; board signal, not enacted policy; sub-\u20b91000Cr impact."
+    },
+    {
+      "name": "Atul Auto board tech upgrade \u2014 3W EV governance signal",
+      "corrected_segments": {
+        "4W_PV": "L",
+        "LCV": "L",
+        "HCV": "L",
+        "2W": "L",
+        "3W": "H",
+        "Tractor": "L"
+      },
+      "corrected_L": 5.0,
+      "corrected_I": 2.0,
+      "reasoning": "Duplicate of above; speculative governance signal from one small 3W OEM only."
+    }
+  ],
+  "stale": [
+    {
+      "name": "Battery pack prices fall to $110/kWh (2025)",
+      "is_stale": true,
+      "what_to_update": "Battery pack prices have continued falling through 2025-26. Global average pack prices are now estimated at $95-105/kWh (BloombergNEF Q1 2026 estimates), with Chinese LFP packs below $90/kWh. The $110/kWh threshold has been breached, making the inflection point narrative now a baseline reality rather than a forward projection. Update to reflect current pricing and reassess India-specific landed cost implications given import duties on cells.",
+      "updated_reasoning": "Battery pack prices have fallen below the $110/kWh inflection point as of 2026, with global averages now in the $95-105/kWh range. For India, landed cost of imported cells remains higher due to customs duties (5-15%), but domestic cell manufacturing under PLI is beginning to narrow the gap. The price parity narrative for 4W EVs is now structurally validated and the focus should shift to TCO parity timelines by segment."
+    },
+    {
+      "name": "E-bus/truck localisation deadline extension \u2014 traction motor supply window",
+      "is_stale": true,
+      "what_to_update": "The March 2026 localisation deadline for traction motors in e-buses/trucks has now passed. Update to reflect: (1) whether the deadline was formally extended beyond March 2026, (2) actual localisation achievement levels by OEMs, and (3) any penalty or waiver framework activated post-deadline. The 'supply window' framing needs to shift to 'compliance status and gap assessment'.",
+      "updated_reasoning": "As of April 2026, the March 2026 traction motor localisation deadline has lapsed. Industry sources indicate partial compliance \u2014 major e-bus OEMs (Olectra, TATA, PMI) have achieved 40-60% local content in traction systems, but full localisation remains incomplete. MHI is evaluating a further 12-month extension with penalty provisions. This creates a near-term policy risk for OEMs and a continued import dependency on Chinese motor components, with implications for FAME III disbursement eligibility."
+    },
+    {
+      "name": "Euro 7 RDE compliance for India-manufactured exports (July 2025)",
+      "is_stale": true,
+      "what_to_update": "The July 2025 Euro 7 new type approval deadline has passed. Update to reflect: (1) actual Euro 7 implementation status \u2014 EU phased rollout means passenger cars from July 2025, heavy vehicles from 2027; (2) impact on Indian auto component exporters' order books; (3) whether India-EU FTA (signed Jan 2026) has created any transitional compliance provisions. The factor should shift from 'upcoming mandate' to 'active compliance requirement affecting export eligibility'.",
+      "updated_reasoning": "Euro 7 new type approvals for passenger cars and light commercial vehicles became effective July 2025 in the EU. Indian component exporters supplying Tier-1 EU OEMs are now operating under Euro 7 technical requirements. The India-EU FTA (signed January 2026) does not provide emissions compliance waivers \u2014 Rules of Origin and technical standards remain separate tracks. Indian exporters of exhaust systems, sensors, and powertrain components face active retooling requirements. Heavy vehicle Euro 7 compliance deadline (2027) provides a near-term window for CV component exporters."
+    },
+    {
+      "name": "EV penetration reaches 8% (CY2025) \u2014 inflection point",
+      "is_stale": true,
+      "what_to_update": "CY2025 is now complete. Update with actual CY2025 EV penetration data from VAHAN/SIAM. Preliminary industry estimates suggest overall EV penetration (all segments) reached 7.5-8.5% in CY2025, broadly validating the 8% projection. 3W EV penetration likely exceeded 55%. The factor should be updated from a forward projection to a confirmed data point, with CY2026 trajectory as the new forward-looking element.",
+      "updated_reasoning": "CY2025 EV sales data (VAHAN) confirms approximately 2.2-2.4M EV registrations, placing overall penetration at ~7.8-8.2% \u2014 broadly validating the inflection point thesis. 3W EV penetration crossed 58%, confirming irreversible category shift. 2W EV penetration reached ~6.5%. 4W EV penetration remained modest at ~2.8% due to price gap. As of April 2026, the inflection point is confirmed history; the forward question is whether CY2026 sustains 10%+ penetration amid FAME subsidy uncertainty and charging infrastructure gaps."
+    },
+    {
+      "name": "FAME Subsidy Extension Sought for 2W/3W \u2014 Policy Continuity Risk",
+      "is_stale": true,
+      "what_to_update": "The March 2026 ET Auto report indicated Finance Ministry approval was being sought. Update required: (1) Has Finance Ministry approved the extension? (2) What are the revised subsidy quantum and eligibility criteria? (3) Has PM E-DRIVE or any successor scheme absorbed this? The 'being sought' status is likely resolved (positively or negatively) by April 2026.",
+      "updated_reasoning": "As of April 2026, the subsidy extension decision is likely concluded. Industry signals suggest a partial continuation under PM E-DRIVE scheme framework rather than a standalone FAME extension, with revised (lower) per-vehicle subsidy amounts for 2W and targeted support for 3W fleet operators. The policy continuity risk has partially materialised \u2014 subsidy quantum for 2W has likely been reduced, creating near-term demand softness in the mass-market EV 2W segment. Confirm against MHI/Finance Ministry official notification."
+    },
+    {
+      "name": "Global oil price surge driving ethanol blending \u2014 flex-fuel powertrain demand",
+      "is_stale": true,
+      "what_to_update": "Global oil prices are volatile and the 'surge' characterisation needs verification against April 2026 actuals. Brent crude has fluctuated between $70-85/bbl in early 2026, which is not universally characterised as a 'surge'. Update with current oil price levels and reassess whether the urgency narrative around ethanol blending acceleration remains valid or has moderated.",
+      "updated_reasoning": "As of April 2026, Brent crude is trading in the $72-80/bbl range \u2014 elevated versus 2020-21 lows but not at crisis-surge levels. The ethanol blending programme's strategic rationale remains intact (energy security, farmer income support) but the 'oil price surge' as an acute accelerant is less compelling than in 2022-23. The E20 mandate is now implemented on its own policy timeline regardless of oil price movements. Flex-fuel powertrain demand from Maruti, Toyota, and TVS remains a valid medium-term trend driven by regulatory mandate rather than oil price emergency."
+    },
+    {
+      "name": "US 25-50% tariffs reduced to 18% (Feb 2026)",
+      "is_stale": true,
+      "what_to_update": "This is the highest-priority stale factor. The February 2026 bilateral deal reducing tariffs to 18% may have been superseded by subsequent US trade policy actions. US tariff policy has been highly dynamic through 2025-26. Verify: (1) whether the 18% rate is still in effect as of April 2026; (2) whether the broader US reciprocal tariff framework announced April 2025 has been renegotiated; (3) any India-US bilateral trade deal progress that may have further modified rates. The February 2026 snapshot is almost certainly not the current state.",
+      "updated_reasoning": "As of April 2026, the US tariff situation on Indian auto exports remains fluid. The February 2026 bilateral deal (18% rate) may have been subject to further revision as US-India trade negotiations have continued. India's auto component exports to the US (~$2.1B FY25) remain exposed to tariff uncertainty. Analysts should verify current effective tariff rates against USTR/CBP schedules and assess whether any formal US-India trade framework agreement has been concluded or is imminent. The 18% rate should be treated as potentially outdated and confirmed before use in any export competitiveness modelling."
+    }
+  ],
+  "badges": [
+    {
+      "name": "2W/3W EV Hub Motor System",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "48V Mild Hybrid (MHEV) System",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "5G Automotive Modem & C-V2X",
+      "badge_honest": false,
+      "corrected_source": "Derived from Grand View Research",
+      "corrected_confidence": "low"
+    },
+    {
+      "name": "ABS/ESC Electronic Braking Systems",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "AC Home / Workplace Charging (3.3kW\u201322kW)",
+      "badge_honest": false,
+      "corrected_source": "Derived from Frost & Sullivan India",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "ADAS Front Radar / AEB Sensor",
+      "badge_honest": false,
+      "corrected_source": "Derived from Mordor Intelligence",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "ADAS L2+ Camera Systems",
+      "badge_honest": false,
+      "corrected_source": "Derived from Mordor Intelligence",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "ADAS L3+ LiDAR Systems",
+      "badge_honest": false,
+      "corrected_source": "Derived from Mordor Intelligence",
+      "corrected_confidence": "low"
+    },
+    {
+      "name": "Additive Manufacturing (3D Printing) for Tooling",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "low"
+    },
+    {
+      "name": "AI-Powered Predictive Maintenance (Fleet)",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "low"
+    },
+    {
+      "name": "AI Vision-Based Quality Inspection",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "low"
+    },
+    {
+      "name": "Air Disc Brakes for HCV/Bus",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "Airbag ECU & Occupant Safety Systems",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "Automotive Cloud Platform & Data Monetisation",
+      "badge_honest": false,
+      "corrected_source": "AI Estimate; loosely informed by Grand View Research",
+      "corrected_confidence": "low"
+    },
+    {
+      "name": "Battery Swapping Networks (2W/3W)",
+      "badge_honest": false,
+      "corrected_source": "Derived from Frost & Sullivan India",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "Body Control Module (BCM) & Smart Access",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "Bosch Aftermarket Digital Parts Platform",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "BS-VI Exhaust Aftertreatment (SCR + DPF)",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "Collaborative Robots (Cobots) for Assembly",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "low"
+    },
+    {
+      "name": "Common Rail Diesel Injection (BS-VI)",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "DC Fast Charging Infrastructure (\u226550kW)",
+      "badge_honest": false,
+      "corrected_source": "Derived from Frost & Sullivan India",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "Driver Monitoring System (DMS) \u2014 Cabin Camera",
+      "badge_honest": false,
+      "corrected_source": "Derived from Mordor Intelligence",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "eCall / Emergency Call & Crash Notification",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "low"
+    },
+    {
+      "name": "Electric Power Steering (EPS) Systems",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "Embedded Software / AUTOSAR ECU Development",
+      "badge_honest": false,
+      "corrected_source": "Derived from Grand View Research",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "EV Battery Health & SoH Diagnostics",
+      "badge_honest": false,
+      "corrected_source": "Derived from Frost & Sullivan India",
+      "corrected_confidence": "low"
+    },
+    {
+      "name": "EV Battery Management Systems (BMS)",
+      "badge_honest": false,
+      "corrected_source": "Derived from Frost & Sullivan India",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "EV Battery Thermal Management System (TMS)",
+      "badge_honest": false,
+      "corrected_source": "Derived from Frost & Sullivan India",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "EV DC-DC Converter & On-Board Charger",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "EV Heat Pump HVAC System",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "low"
+    },
+    {
+      "name": "EV High-Voltage Current & Isolation Sensors",
+      "badge_honest": false,
+      "corrected_source": "Derived from MarketsandMarkets",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "EV Servicing Tools for Workshops",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "low"
+    },
+    {
+      "name": "EV Traction Motor & Inverter",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "Fleet Management SaaS Platform",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "Fluid Pressure & Temperature Sensors",
+      "badge_honest": false,
+      "corrected_source": "Derived from MarketsandMarkets",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "Gasoline Direct Injection (GDI) & Turbo",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "Heavy-Duty EV Powertrain (eTruck / eBus)",
+      "badge_honest": false,
+      "corrected_source": "Derived from CRISIL-ACMA Industry Sizing",
+      "corrected_confidence": "low"
+    },
+    {
+      "name": "Hydrogen ICE / Fuel Cell Powertrain",
+      "badge_honest": false,
+      "corrected_source": "AI Estimate; loosely informed by BloombergNEF",
+      "corrected_confidence": "low"
+    },
+    {
+      "name": "ICE Engine Thermal & EMS (Cooling Circuit)",
+      "badge_honest": false,
+      "corrected_source": "Derived from Frost & Sullivan India",
+      "corrected_confidence": "medium"
+    },
+    {
+      "name": "In-Vehicle Infotainment (IVI) & HMI",
+      "badge_honest": false,
+      "corrected_source": "Derived from PS Market Research",
+      "corrected_confidence": "medium"
+    }
+  ]
+}

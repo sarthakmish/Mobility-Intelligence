@@ -1,0 +1,15 @@
+UPDATE pestel_factors SET affected_pillars = replace(affected_pillars::text, '"Body Electronics"', '"Body & Comfort"')::jsonb WHERE affected_pillars::text LIKE '%Body Electronics%';
+UPDATE pestel_factors SET affected_pillars = replace(affected_pillars::text, '"Chassis Systems"', '"Motion"')::jsonb WHERE affected_pillars::text LIKE '%Chassis Systems%';
+UPDATE pestel_factors SET affected_pillars = replace(affected_pillars::text, '"Energy & Charging"', '"Energy"')::jsonb WHERE affected_pillars::text LIKE '%Energy & Charging%';
+UPDATE pestel_factors SET affected_pillars = replace(affected_pillars::text, '"EV Powertrain"', '"Energy"')::jsonb WHERE affected_pillars::text LIKE '%EV Powertrain%';
+UPDATE pestel_factors SET affected_pillars = replace(affected_pillars::text, '"Infotainment & Connectivity"', '"Infotainment"')::jsonb WHERE affected_pillars::text LIKE '%Infotainment & Connectivity%';
+UPDATE pestel_factors SET affected_pillars = replace(affected_pillars::text, '"Manufacturing & Industry 4.0"', '"Compute"')::jsonb WHERE affected_pillars::text LIKE '%Manufacturing%';
+UPDATE pestel_factors SET affected_pillars = replace(affected_pillars::text, '"Power Tools & Solutions"', '"Actuators"')::jsonb WHERE affected_pillars::text LIKE '%Power Tools%';
+UPDATE pestel_factors SET affected_pillars = replace(affected_pillars::text, '"Powertrain Solutions"', '"Motion"')::jsonb WHERE affected_pillars::text LIKE '%Powertrain Solutions%';
+UPDATE pestel_factors SET affected_pillars = replace(affected_pillars::text, '"Software & Services"', '"OS"')::jsonb WHERE affected_pillars::text LIKE '%Software & Services%';
+UPDATE pestel_factors SET affected_pillars = replace(affected_pillars::text, '"Thermal Management"', '"Energy"')::jsonb WHERE affected_pillars::text LIKE '%Thermal Management%';
+UPDATE pestel_factors SET affected_pillars = replace(affected_pillars::text, '"Vehicle Diagnostics"', '"Infotainment"')::jsonb WHERE affected_pillars::text LIKE '%Vehicle Diagnostics%';
+UPDATE pestel_factors SET affected_pillars = replace(affected_pillars::text, '"Vehicle Motion"', '"Motion"')::jsonb WHERE affected_pillars::text LIKE '%Vehicle Motion%';
+UPDATE pestel_factors SET affected_pillars = replace(affected_pillars::text, '"Aftermarket & Retrofit"', '"Services"')::jsonb WHERE affected_pillars::text LIKE '%Aftermarket%';
+UPDATE pestel_factors SET affected_pillars = replace(affected_pillars::text, '"Safety & Security"', '"ADAS"')::jsonb WHERE affected_pillars::text LIKE '%Safety & Security%';
+SELECT DISTINCT jsonb_array_elements_text(affected_pillars) AS pil FROM pestel_factors ORDER BY pil;
