@@ -202,6 +202,9 @@ app.add_middleware(
         r"|172\.(1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3}"
         r"|192\.168\.\d{1,3}\.\d{1,3})"
         r"(:\d+)?"
+        r"|https://[a-zA-Z0-9-]+\.netlify\.app"
+        r"|https://[a-zA-Z0-9-]+\.railway\.app"
+        r"|https://[a-zA-Z0-9-]+\.vercel\.app"
     ),
     allow_credentials=True,
     allow_methods=["*"],
