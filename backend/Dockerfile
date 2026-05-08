@@ -16,11 +16,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy and install Python dependencies first (Docker cache layer)
-COPY requirements.txt .
+# Build context is repo root, so prefix paths with backend/
+COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the entire backend application code
-COPY . .
+COPY backend/ .
 
 # Expose the API port (Railway injects $PORT at runtime)
 EXPOSE 8001
