@@ -22,7 +22,8 @@ import asyncpg
 
 APPLY = "--apply" in sys.argv
 
-DB_URL = "postgresql://postgres:sarthak@localhost:5432/mobility_intelligence"
+import os
+DB_URL = os.environ.get("DATABASE_URL", "postgresql://postgres:sarthak@localhost:5432/mobility_intelligence").replace("postgresql+asyncpg://", "postgresql://")
 
 # ── Cloud pillar players: connected vehicle clouds, V2X infra, OTA platforms ──
 CLOUD_PLAYERS = {

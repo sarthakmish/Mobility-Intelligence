@@ -20,7 +20,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import asyncpg
 
-DB_URL = "postgresql://postgres:sarthak@localhost:5432/mobility_intelligence"
+import os
+DB_URL = os.environ.get("DATABASE_URL", "postgresql://postgres:sarthak@localhost:5432/mobility_intelligence").replace("postgresql+asyncpg://", "postgresql://")
 APPLY = "--apply" in sys.argv
 
 # ── New competitors to register (only those not already in the DB) ──

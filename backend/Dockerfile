@@ -23,8 +23,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the entire backend application code
 COPY backend/ .
 
+# Copy startup script and make executable
+COPY backend/startup.sh /app/startup.sh
+RUN chmod +x /app/startup.sh
+
 # Expose the API port (Railway injects $PORT at runtime)
 EXPOSE 8001
 
-# Production: no --reload. Railway sets PORT env var automatically.
-CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8001}"]
+# Run migrations + seeds + start server
+CMD ["/app/startup.sh"]
