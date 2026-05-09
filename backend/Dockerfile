@@ -23,6 +23,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the entire backend application code
 COPY backend/ .
 
+# Copy the root-level scripts folder (contains seed_initial_data.py, seed_full_data.py, etc.)
+COPY scripts/ /app/root_scripts/
+
 # Copy startup script
 COPY backend/startup.py /app/startup.py
 

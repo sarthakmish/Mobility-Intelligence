@@ -41,23 +41,35 @@ async def run_migrations(db_url: str):
 
 def run_seeds():
     import subprocess
+    # (module_path, extra_args)
+    # seed_initial_data lives in the ROOT scripts/ folder (one level up from /app)
+    # seed_oem_sourcing and seed_tech_shares_complete need --apply to commit
     seeds = [
-        "scripts.seed_competitors",
-        "scripts.seed_solutions_techs",
-        "scripts.seed_competitors_solutions",
-        "scripts.seed_competitors_remaining",
-        "scripts.seed_cloud_competitors",
-        "scripts.seed_oem_sourcing",
-        "scripts.seed_tech_shares_complete",
+        ("scripts.seed_initial_data",       []),
+        ("scripts.seed_competitors",         []),
+        ("scripts.seed_solutions_techs",     []),
+        ("scripts.seed_competitors_solutions",[]),
+        ("scripts.seed_competitors_remaining",[]),
+        ("scripts.seed_cloud_competitors",   []),
+        ("scripts.seed_oem_sourcing",        ["--apply"]),
+        ("scripts.seed_tech_shares_complete",["--apply"]),
     ]
     log(f"▶ Running {len(seeds)} seed scripts...")
-    for seed in seeds:
-        result = subprocess.run(
-            [sys.executable, "-m", seed],
-            capture_output=True, text=True, timeout=300
-        )
+    for module, extra_args in seeds:
+        # seed_initial_data lives in /app/root_scripts/ inside the container
+        if module == "scripts.seed_initial_data":
+            cwd = os.path.dirname(os.path.abspath(__file__))  # /app
+            result = subprocess.run(
+                [sys.executable, os.path.join(cwd, "root_scripts", "seed_initial_data.py")],
+                capture_output=True, text=True, timeout=300, cwd=cwd
+            )
+        else:
+            result = subprocess.run(
+                [sys.executable, "-m", module] + extra_args,
+                capture_output=True, text=True, timeout=300
+            )
         last_line = (result.stdout + result.stderr).strip().split("\n")[-1]
-        log(f"  {'✅' if result.returncode == 0 else '⚠️ '} {seed.split('.')[-1]}: {last_line}")
+        log(f"  {'✅' if result.returncode == 0 else '⚠️ '} {module.split('.')[-1]}: {last_line}")
     log("▶ Seeding complete.")
 
 
