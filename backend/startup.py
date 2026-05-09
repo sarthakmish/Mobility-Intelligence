@@ -41,33 +41,20 @@ async def run_migrations(db_url: str):
 
 def run_seeds():
     import subprocess
-    # (module_path, extra_args)
-    # seed_initial_data lives in the ROOT scripts/ folder (one level up from /app)
-    # seed_oem_sourcing and seed_tech_shares_complete need --apply to commit
+    # Migration 011 already imports all curated local data directly.
+    # Only run seed_initial_data as a safety net for any newly added tables.
+    # Skip the LLM-based seed scripts (seed_competitors, seed_tech_shares, etc.)
+    # since they call the LLM API, are slow (~10 min), and migration 011 has better data.
     seeds = [
-        ("scripts.seed_initial_data",       []),
-        ("scripts.seed_competitors",         []),
-        ("scripts.seed_solutions_techs",     []),
-        ("scripts.seed_competitors_solutions",[]),
-        ("scripts.seed_competitors_remaining",[]),
-        ("scripts.seed_cloud_competitors",   []),
-        ("scripts.seed_oem_sourcing",        ["--apply"]),
-        ("scripts.seed_tech_shares_complete",["--apply"]),
+        ("scripts.seed_initial_data", []),  # idempotent — seeds only if tables empty
     ]
     log(f"▶ Running {len(seeds)} seed scripts...")
     for module, extra_args in seeds:
-        # seed_initial_data lives in /app/root_scripts/ inside the container
-        if module == "scripts.seed_initial_data":
-            cwd = os.path.dirname(os.path.abspath(__file__))  # /app
-            result = subprocess.run(
-                [sys.executable, os.path.join(cwd, "root_scripts", "seed_initial_data.py")],
-                capture_output=True, text=True, timeout=300, cwd=cwd
-            )
-        else:
-            result = subprocess.run(
-                [sys.executable, "-m", module] + extra_args,
-                capture_output=True, text=True, timeout=300
-            )
+        cwd = os.path.dirname(os.path.abspath(__file__))  # /app
+        result = subprocess.run(
+            [sys.executable, os.path.join(cwd, "root_scripts", "seed_initial_data.py")],
+            capture_output=True, text=True, timeout=300, cwd=cwd
+        )
         last_line = (result.stdout + result.stderr).strip().split("\n")[-1]
         log(f"  {'✅' if result.returncode == 0 else '⚠️ '} {module.split('.')[-1]}: {last_line}")
     log("▶ Seeding complete.")
