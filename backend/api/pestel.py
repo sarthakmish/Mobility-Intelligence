@@ -25,12 +25,11 @@ async def get_all_pestel_factors(
     Returns all active PESTEL factors with closest-to-anchor history points
     so the frontend can plot Jan 2025 / Jan 2026 / Now trajectories.
     """
-    # ── Main query: factor + 3 anchor history points via lateral join ──
-    # For each factor, pull the snapshot closest in time to:
-    #   - Jan 15, 2025  (Jan 2025 baseline)
-    #   - Jan 15, 2026  (Jan 2026 baseline)
-    # The Now point comes from the live row.
-    result = await db.execute(text("""
+    # ── Main query: factor + anchor history points ──
+    # Try the full query with pestel_score_history subqueries first.
+    # If the history table doesn't exist yet (e.g. migration 010 not run),
+    # fall back to a simpler query so the API never returns 500.
+    _FULL_SQL = text("""
         SELECT
             f.id, f.code, f.name, f.category,
             f.likelihood, f.likelihood_reasoning,
@@ -41,12 +40,6 @@ async def get_all_pestel_factors(
             f.origin_date, f.is_foundational,
             f.verification_verdict, f.verification_source,
             f.first_seen_date, f.last_confirmed_date, f.confirmation_count,
-            -- Freshness tier (computed at query time for display):
-            --   FRESH      = seen in last 7 days, not yet confirmed
-            --   ESTABLISHED = foundational OR confirmed 3+ times
-            --   DECAYING   = unconfirmed for >14 days with only 1 hit
-            --   FADING     = unconfirmed for >30 days
-            --   EMERGING   = everything else
             CASE
                 WHEN f.is_foundational = TRUE THEN 'ESTABLISHED'
                 WHEN f.first_seen_date > NOW() - INTERVAL '7 days' THEN 'FRESH'
@@ -57,7 +50,6 @@ async def get_all_pestel_factors(
                      THEN 'DECAYING'
                 ELSE 'EMERGING'
             END AS freshness_tier,
-            -- Anchor points from history. Closest snapshot to each target date.
             (
                 SELECT json_build_object('l', h.likelihood, 'i', h.impact, 'date', h.recorded_at)
                 FROM pestel_score_history h
@@ -78,7 +70,35 @@ async def get_all_pestel_factors(
         FROM pestel_factors f
         WHERE f.is_active = TRUE
         ORDER BY (f.likelihood * f.impact) DESC
-    """))
+    """)
+    # Simpler fallback — no history columns, no optional columns added by later migrations
+    _SIMPLE_SQL = text("""
+        SELECT
+            f.id, f.code, f.name, f.category,
+            f.likelihood, f.likelihood_reasoning,
+            f.impact, f.impact_reasoning,
+            f.selection_reasoning, f.trend, f.time_horizon,
+            f.segment_relevance, f.affected_pillars,
+            f.source_ids, f.last_refreshed,
+            NULL::date AS origin_date,
+            FALSE AS is_foundational,
+            'UNVERIFIED' AS verification_verdict,
+            '' AS verification_source,
+            NULL::timestamptz AS first_seen_date,
+            NULL::timestamptz AS last_confirmed_date,
+            1 AS confirmation_count,
+            'EMERGING' AS freshness_tier,
+            NULL AS jan25_pt,
+            NULL AS jan26_pt
+        FROM pestel_factors f
+        WHERE f.is_active = TRUE
+        ORDER BY (f.likelihood * f.impact) DESC
+    """)
+    try:
+        result = await db.execute(_FULL_SQL)
+    except Exception:
+        await db.rollback()
+        result = await db.execute(_SIMPLE_SQL)
 
     factors = []
     import json as _json
@@ -153,17 +173,22 @@ async def get_factor_history(code: str, db: AsyncSession = Depends(get_db)):
     if not f:
         return {"error": "Factor not found"}
 
-    history = await db.execute(
-        text(
-            "SELECT recorded_at, likelihood, impact, source "
-            "FROM pestel_score_history WHERE factor_code = :code "
-            "ORDER BY recorded_at ASC"
-        ),
-        {"code": code},
-    )
+    try:
+        history = await db.execute(
+            text(
+                "SELECT recorded_at, likelihood, impact, source "
+                "FROM pestel_score_history WHERE factor_code = :code "
+                "ORDER BY recorded_at ASC"
+            ),
+            {"code": code},
+        )
+        history_rows = history.fetchall()
+    except Exception:
+        await db.rollback()
+        history_rows = []
 
     points = []
-    for h in history.fetchall():
+    for h in history_rows:
         points.append(
             {
                 "date": h.recorded_at.isoformat(),
