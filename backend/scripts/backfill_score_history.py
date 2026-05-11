@@ -41,7 +41,7 @@ Run:
 import asyncio
 import sys
 import os
-from datetime import datetime, timezone
+from datetime import datetime, date as date_type, timezone
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 
@@ -70,6 +70,19 @@ def synth_midpoint(current_l: float, current_i: float, trend: str) -> tuple:
     return (current_l, current_i)
 
 
+def synth_jan26(current_l: float, current_i: float, trend: str) -> tuple:
+    """Jan 2026 position — halfway between midpoint and Now.
+    For escalating: L is 0.5 below current → numeric delta > 5% → ▲ triggers.
+    For de-escalating: L is 0.5 above current → ▼ triggers.
+    For stable: same as current → ■ correct.
+    """
+    if trend == "escalating":
+        return (max(1.0, current_l - 0.5), current_i)
+    if trend == "de-escalating":
+        return (min(10.0, current_l + 0.5), current_i)
+    return (current_l, current_i)
+
+
 def build_history_points(origin_dt, current_l, current_i, trend, is_foundational):
     """Return list of (recorded_at, likelihood, impact, source) tuples."""
     if not origin_dt:
@@ -90,10 +103,12 @@ def build_history_points(origin_dt, current_l, current_i, trend, is_foundational
         # 4 anchor points for old foundational factors
         m_l, m_i = synth_midpoint(current_l, current_i, trend)
         points.append((JAN_2025, m_l, m_i, "synthesized_jan2025"))
-        # current_l/current_i is "Jan 2026 baseline" approximation
-        points.append((JAN_2026, current_l, current_i, "synthesized_jan2026"))
+        # Jan 2026 = halfway between midpoint and Now (not current!) so delta triggers
+        j26_l, j26_i = synth_jan26(current_l, current_i, trend)
+        points.append((JAN_2026, j26_l, j26_i, "synthesized_jan2026"))
     elif age_months >= 12 and origin_dt < JAN_2026:
-        points.append((JAN_2026, current_l, current_i, "synthesized_jan2026"))
+        j26_l, j26_i = synth_jan26(current_l, current_i, trend)
+        points.append((JAN_2026, j26_l, j26_i, "synthesized_jan2026"))
     elif age_months >= 6:
         m_dt = origin_dt + (NOW - origin_dt) / 2
         m_l, m_i = synth_midpoint(current_l, current_i, trend)
@@ -135,13 +150,17 @@ async def main():
         print(f"Found {len(factors)} active factors. Synthesizing history...\n")
 
         for f in factors:
-            # If already has 3+ snapshots, skip
-            if f.history_count >= 3:
+            # If already has 3+ snapshots, skip (unless --force re-synthesizes)
+            force = "--force" in sys.argv
+            if f.history_count >= 3 and not force:
                 skipped += 1
                 continue
 
             origin_dt = f.origin_date or f.created_at
-            if origin_dt is not None and hasattr(origin_dt, 'tzinfo') and origin_dt.tzinfo is None:
+            # Normalize: date objects (from DATE columns) → aware datetime
+            if isinstance(origin_dt, date_type) and not isinstance(origin_dt, datetime):
+                origin_dt = datetime(origin_dt.year, origin_dt.month, origin_dt.day, tzinfo=timezone.utc)
+            elif origin_dt is not None and getattr(origin_dt, 'tzinfo', None) is None:
                 origin_dt = origin_dt.replace(tzinfo=timezone.utc)
 
             points = build_history_points(
@@ -156,10 +175,11 @@ async def main():
                 skipped += 1
                 continue
 
-            # Wipe existing synthesized rows for this factor (may conflict)
+            # Wipe synthesized + backfill rows so corrected values can be re-inserted
             await db.execute(
                 text("DELETE FROM pestel_score_history WHERE factor_code = :c "
-                     "AND source LIKE 'synthesized_%'"),
+                     "AND source IN ('synthesized_origin','synthesized_jan2025',"
+                     "'synthesized_jan2026','synthesized_midpoint','backfill_current')"),
                 {"c": f.code},
             )
 

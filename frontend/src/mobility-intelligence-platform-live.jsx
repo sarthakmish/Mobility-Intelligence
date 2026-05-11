@@ -7,7 +7,7 @@ import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 
 // ── API CONFIGURATION ─────────────────────────────────────────
 // Vite proxies /api → localhost:8001, so this works on any IP/hostname with no CORS.
-const API_BASE = "";
+const API_BASE = import.meta.env.VITE_API_URL ?? "";
 
 // ── API → Dashboard data transformers ─────────────────────────
 // The API returns {code, name, category, likelihood, impact, ...}
@@ -29,7 +29,7 @@ const transformPestel = (apiFactors) => apiFactors.map(f => {
     sr: (f.selection_reasoning || "").substring(0, 300),
     src: "Live API",
     st: f.trend === "new" ? "New" : f.trend === "escalating" ? "Escalating" : f.trend === "de-escalating" ? "De-escalating" : "Active",
-    isNew: f.trend === "new",
+    isNew: f.origin_date ? (Date.now() - new Date(f.origin_date).getTime()) < 90 * 86400000 : f.trend === "new",
     origin: originStr,                        // ← derived from origin_date
     originDate: f.origin_date || null,        // ← raw ISO for timeline plotting
     isFoundational: f.is_foundational || false,
@@ -768,51 +768,68 @@ export default function MobilityIntelligence(){
       const jan26 = new Date("2026-01-15");
 
       const pts = [];
+      const nowPos = f.pos.mar26;
+      if(!nowPos) return{f,pts};
 
-      // 1. ORIGIN — synthesized starting position (if originDate available)
-      // Clamped to visible chart range so trajectory always stays in view
+      // Determine trend direction from LLM tag — used for synthesis when DB has no snapshots
+      const sLow = String(f.st||f.trend||"").toLowerCase();
+      const isEscalating = sLow.includes("escalat") || sLow.includes("acceler") || sLow.includes("rising") || sLow.includes("growing");
+      const isDeescalating = sLow.includes("de-escalat") || sLow.includes("declin") || sLow.includes("fading");
+
+      // Walk backward from Now based on trend direction
+      const synthEarlier = (monthsBack)=>{
+        const stepL = isEscalating ? -0.4 : isDeescalating ? +0.4 : 0;
+        const stepI = isEscalating ? -0.3 : isDeescalating ? +0.3 : 0;
+        const scale = Math.min(monthsBack/12, 1.5);
+        return [
+          Math.max(5, Math.min(10, nowPos[0] + stepL * scale)),
+          Math.max(4, Math.min(10, nowPos[1] + stepI * scale)),
+        ];
+      };
+
+      // 1. ORIGIN — earliest point
       if (originDt) {
-        const refPos = f.pos.jan25 || f.pos.jan26 || f.pos.mar26;
-        if (refPos) {
-          // Shift ~1-1.5 pts down each axis; clamp to chart minimum (5,4)
-          const synthL = Math.max(5, Math.min(10, refPos[0] - 1.2));
-          const synthI = Math.max(4, Math.min(10, refPos[1] - 0.8));
-          // Skip if indistinguishably close to earliest anchor
-          const earliestKnown = f.pos.jan25 || f.pos.jan26 || f.pos.mar26;
-          const tooClose = earliestKnown && Math.abs(synthL - earliestKnown[0]) < 0.4 && Math.abs(synthI - earliestKnown[1]) < 0.4;
-          if (!tooClose) {
-            const oLabel = originDt.toLocaleDateString("en-US",{month:"short",year:"numeric"});
-            pts.push({
-              label:`Origin · ${oLabel}`,
-              pos:[synthL, synthI],
-              kind:"origin",
-              isSynthetic: true,
-            });
-          }
+        const monthsBack = Math.max(1, (Date.now() - originDt.getTime())/(30*86400000));
+        const refPos = f.pos.jan25 || f.pos.jan26 || nowPos;
+        const synthL = Math.max(5, Math.min(10, refPos[0] - Math.min(1.8, monthsBack*0.05)));
+        const synthI = Math.max(4, Math.min(10, refPos[1] - Math.min(1.2, monthsBack*0.03)));
+        const tooClose = Math.abs(synthL - nowPos[0]) < 0.3 && Math.abs(synthI - nowPos[1]) < 0.3;
+        if (!tooClose) {
+          const oLabel = originDt.toLocaleDateString("en-US",{month:"short",year:"numeric"});
+          pts.push({label:`Origin · ${oLabel}`, pos:[synthL, synthI], kind:"origin", isSynthetic:true});
         }
       }
 
-      // 2. JAN 2025 — only if we have data and origin isn't within 3 months
-      if (f.pos.jan25) {
-        const skip = originDt && Math.abs(originDt - jan25) < 90 * 86400000;
-        if (!skip) pts.push({label:"Jan 2025", pos:f.pos.jan25, kind:"anchor"});
+      // 2. JAN 2025 — real if available, synthesize if factor existed by then
+      const existedByJan25 = !originDt || originDt <= jan25 || f.isFoundational;
+      if (existedByJan25) {
+        if (f.pos.jan25) {
+          pts.push({label:"Jan 2025", pos:f.pos.jan25, kind:"anchor"});
+        } else {
+          const monthsBack = (Date.now() - jan25.getTime())/(30*86400000);
+          pts.push({label:"Jan 2025 (est.)", pos:synthEarlier(monthsBack), kind:"anchor", isSynthetic:true});
+        }
       }
 
-      // 3. JAN 2026 — only if we have data and origin isn't within 3 months
-      if (f.pos.jan26) {
-        const skip = originDt && Math.abs(originDt - jan26) < 90 * 86400000;
-        if (!skip) pts.push({label:"Jan 2026", pos:f.pos.jan26, kind:"anchor"});
-      } else if (originDt && originDt > jan26 && f.pos.mar26) {
-        // Factor emerged between Jan 2026 and now — show Emerged badge at current pos
+      // 3. JAN 2026 — real if available, synthesize if factor existed by then
+      const existedByJan26 = !originDt || originDt <= jan26 || f.isFoundational;
+      if (existedByJan26) {
+        if (f.pos.jan26) {
+          pts.push({label:"Jan 2026", pos:f.pos.jan26, kind:"anchor"});
+        } else {
+          const monthsBack = (Date.now() - jan26.getTime())/(30*86400000);
+          pts.push({label:"Jan 2026 (est.)", pos:synthEarlier(monthsBack), kind:"anchor", isSynthetic:true});
+        }
+      } else if (originDt && originDt > jan26) {
         const m = originDt.toLocaleDateString("en-US",{month:"short",year:"numeric"});
-        pts.push({label:`Emerged ${m}`, pos:f.pos.mar26, kind:"emerged"});
+        pts.push({label:`Emerged ${m}`, pos:nowPos, kind:"emerged"});
       }
 
-      // 4. NOW — always present; suppress if Emerged was just added at same pos
-      if (f.pos.mar26) {
-        const lastPt = pts[pts.length - 1];
-        const skip = lastPt && lastPt.kind === "emerged";
-        if (!skip) pts.push({label:_nowMonth, pos:f.pos.mar26, kind:"now"});
+      // 4. NOW — always present; suppress if too close to last point
+      if (nowPos) {
+        const lastPt = pts[pts.length-1];
+        const tooClose = lastPt && Math.abs(lastPt.pos[0]-nowPos[0])<0.2 && Math.abs(lastPt.pos[1]-nowPos[1])<0.2;
+        if (!tooClose) pts.push({label:_nowMonth, pos:nowPos, kind:"now"});
       }
 
       return{f,pts};
@@ -828,13 +845,23 @@ export default function MobilityIntelligence(){
           {[0,5,10,15,20].map(n=>(
             <button key={n} onClick={()=>setV1Top(n)} style={{padding:"4px 8px",borderRadius:"5px",border:`1px solid ${v1Top===n?t.acc:t.border}`,background:v1Top===n?`${t.acc}18`:t.btn,color:v1Top===n?t.acc:t.c2,fontSize:"10px",fontWeight:600,cursor:"pointer"}}>{n===0?"All":`Top ${n}`}</button>
           ))}
-          {/* ── Baseline year toggle ── */}
+          {/* ── Historical lens — opt-in only; "Now" is implicit default ── */}
           <span style={{width:1,height:20,background:t.border,margin:"0 4px"}}/>
-          <span style={{fontSize:"10px",color:t.c3,fontWeight:600,marginRight:"3px"}}>BASELINE:</span>
+          <span style={{fontSize:"10px",color:t.c3,fontWeight:600,marginRight:"3px"}}>VIEW AS OF:</span>
+          {v1Baseline==="now" ? (
+            <span style={{fontSize:"10px",color:t.c2,fontStyle:"italic"}}>
+              Current (live data, May 2026) — click below to rewind
+            </span>
+          ) : (
+            <button onClick={()=>{setV1Baseline("now");setV1Sel(null);}}
+              title="Return to current/live view"
+              style={{padding:"4px 9px",borderRadius:"5px",border:`1px solid ${t.acc}`,
+                background:`${t.acc}10`,color:t.acc,
+                fontSize:"10px",fontWeight:600,cursor:"pointer"}}>← Back to Current</button>
+          )}
           {[
-            ["now","Now",`Live (${new Date().toLocaleDateString("en-US",{month:"short",year:"numeric"})})`],
-            ["jan26","Jan 2026","As of Jan 2026 — factors not yet emerged are hidden"],
-            ["jan25","Jan 2025","As of Jan 2025 — factors not yet emerged are hidden"],
+            ["jan26","Jan 2026","Rewind to Jan 2026 — factors that emerged after this date will be hidden"],
+            ["jan25","Jan 2025","Rewind to Jan 2025 — see the world as our analysts saw it 16 months ago"],
           ].map(([k,l,tip])=>(
             <button key={k} title={tip} onClick={()=>{setV1Baseline(k);setV1Sel(null);}}
               style={{padding:"4px 9px",borderRadius:"5px",border:`1px solid ${v1Baseline===k?t.acc:t.border}`,
@@ -842,7 +869,7 @@ export default function MobilityIntelligence(){
                 fontSize:"10px",fontWeight:600,cursor:"pointer"}}>{l}</button>
           ))}
           {v1Baseline!=="now" && <span style={{fontSize:"9px",color:"#f59e0b",fontStyle:"italic",marginLeft:"4px"}}>
-            ⚠ Showing historical view ({v1Baseline==="jan25"?"Jan 2025":"Jan 2026"}) — factors emerged after this date are hidden. Positions for factors without recorded snapshots are estimated from current data.
+            ⚠ Historical view ({v1Baseline==="jan25"?"Jan 2025":"Jan 2026"}) — factors emerged after this date hidden. Trend symbols compare this baseline to the prior year.
           </span>}
           {isCompare&&<button onClick={()=>setV1Compare([])} style={{marginLeft:"auto",padding:"4px 10px",borderRadius:"5px",border:`1px solid ${t.acc}`,background:`${t.acc}18`,color:t.acc,fontSize:"10px",cursor:"pointer",fontWeight:600}}>✕ Exit Compare ({v1Compare.length})</button>}
         </div>
@@ -882,12 +909,16 @@ export default function MobilityIntelligence(){
               }}}
               for(let i=0;i<lbls.length;i++){lbls[i].x=Math.max(pad.l+lbls[i].w/2,Math.min(W-pad.r-lbls[i].w/2,lbls[i].x));lbls[i].y=Math.max(pad.t+6,Math.min(H-pad.b-4,lbls[i].y));}
               return bubbles.map((b,idx)=>{const cc=CAT[b.cat].c;const isSel=v1Sel?.id===b.id;const inCmp=v1Compare.includes(b.id);const lb=lbls[idx];
-              return <g key={b.id} style={{cursor:"pointer"}} onClick={()=>{if(isSel){setV1Sel(null);setAiAnalysis(null);}else{setV1Sel(b);if(b._from_api)fetchPestelAnalysis(b.id);}}} onContextMenu={e=>{e.preventDefault();setV1Compare(p=>p.includes(b.id)?p.filter(x=>x!==b.id):[...p,b.id]);}}>
+              return <g key={b.id} style={{cursor:"pointer"}} onClick={()=>{if(isSel){setV1Sel(null);setAiAnalysis(null);}else{setV1Sel(b);if(b._from_api)fetchPestelAnalysis(b.id);}}} onContextMenu={e=>{e.preventDefault();setV1Compare(p=>p.includes(b.id)?p.filter(x=>x!==b.id):p.length>=3?p:[...p,b.id]);}}>
                 <title>{b.name} (L:{b.lk} I:{b.imp} Score:{Math.round(b.lk*b.imp)})</title>
                 <circle cx={b.cx} cy={b.cy} r={b.r} fill={`${cc}${dk?"30":"20"}`} stroke={`${cc}${isSel||inCmp?"":"70"}`} strokeWidth={isSel?2.5:inCmp?2:1} opacity={isCompare&&!inCmp?0.2:1}/>
                 {(isSel||inCmp)&&<circle cx={b.cx} cy={b.cy} r={b.r+4} fill="none" stroke={cc} strokeWidth={1.5} opacity={0.5} strokeDasharray="3,3"/>}
                 {(()=>{
-                  // V3-matching glyphs: ▲ escalating, ■ stable, ▼ declining, NEW badge
+                  // Trend glyph priority:
+                  //   1. NEW badge if factor is new AND viewing "now"
+                  //   2. Numeric delta if we have both pCur and pRef (real history)
+                  //   3. Qualitative b.st string from LLM as fallback
+                  //   4. ■ stable default
                   let glyph="\u25A0",gColor="#3b82f6",isNewBadge=false;
                   let pCur=null,pRef=null;
                   if(v1Baseline==="now"){
@@ -896,20 +927,29 @@ export default function MobilityIntelligence(){
                   }else if(v1Baseline==="jan26"){
                     pCur=b.pos?.jan26;
                     pRef=b.pos?.jan25;
-                  }else{// jan25 — no prior reference
+                  }else{
                     pCur=b.pos?.jan25;
                     pRef=null;
                   }
                   if(b.isNew && v1Baseline==="now"){
                     isNewBadge=true;
                   }else if(pCur && pRef){
+                    // Numeric delta: have real history to compare
                     const s1=pRef[0]*pRef[1], s2=pCur[0]*pCur[1];
-                    // ±5% threshold — matches panel chip (was ±10% which made too many factors look stable)
-                    if(s2>s1*1.05){glyph="\u25B2"; gColor="#22c55e";}
-                    else if(s2<s1*0.95){glyph="\u25BC"; gColor="#ef4444";}
+                    // Risk convention: ▲ RED = risk escalating (bad), ▼ GREEN = risk falling (good)
+                    if(s2>s1*1.05){glyph="\u25B2"; gColor="#ef4444";}
+                    else if(s2<s1*0.95){glyph="\u25BC"; gColor="#22c55e";}
                     else{glyph="\u25A0"; gColor="#3b82f6";}
-                  }else if(pCur){
-                    glyph="\u25A0"; gColor="#3b82f6";
+                  }else if(v1Baseline==="now" && b.st){
+                    // No history anchors — fall back to qualitative LLM trend string
+                    const sLow = String(b.st).toLowerCase();
+                    if(sLow.includes("escalat") || sLow.includes("acceler") || sLow.includes("rising") || sLow.includes("growing") || sLow.includes("upcoming")){
+                      glyph="\u25B2"; gColor="#ef4444";
+                    } else if(sLow.includes("de-escalat") || sLow.includes("declin") || sLow.includes("fading") || sLow.includes("decreas")){
+                      glyph="\u25BC"; gColor="#22c55e";
+                    } else {
+                      glyph="\u25A0"; gColor="#3b82f6";
+                    }
                   }
                   if(isNewBadge){
                     return(<g style={{pointerEvents:"none"}}>
@@ -995,13 +1035,13 @@ export default function MobilityIntelligence(){
         <div style={{display:"flex",gap:"10px",marginTop:"6px",justifyContent:"center",flexWrap:"wrap"}}>
           {Object.entries(CAT).map(([k,v])=><div key={k} style={{display:"flex",alignItems:"center",gap:"3px"}}><div style={{width:9,height:9,borderRadius:"50%",background:`${v.c}40`,border:`2px solid ${v.c}`}}/><span style={{fontSize:"9px",color:t.c2}}>{v.l}</span></div>)}
           <span style={{width:1,height:14,background:t.border,margin:"0 2px"}}/>
-          <span title="A factor's L×I score is compared to its prior baseline:\n• Now → vs Jan 2026\n• Jan 2026 → vs Jan 2025\n• Jan 2025 → no comparison (■)\nThreshold: ±10% change in L×I." style={{fontSize:"9px",color:t.c3,fontStyle:"italic",cursor:"help",marginRight:"4px"}}>
-            ⓘ How to read trend
+          <span title={"How to read the trend symbols:\n\n▲ Escalating — risk increased >5% vs prior baseline\n▼ Declining — risk decreased >5% vs prior baseline\n■ Stable — within ±5% of prior baseline\n🆕 New — factor emerged in last 90 days\n\nComparison rule:\n• Current view → compares to Jan 2026 snapshot\n• Jan 2026 view → compares to Jan 2025 snapshot\n• Jan 2025 view → no prior (all ■)\n\nWhen DB snapshots are missing, the AI's qualitative trend tag (Escalating/Declining/Stable) is used. Trajectory anchors marked '(est.)' are synthesized from the trend direction."} style={{fontSize:"9px",color:t.acc,fontStyle:"italic",cursor:"help",marginRight:"4px",fontWeight:600,padding:"2px 6px",borderRadius:"4px",background:`${t.acc}10`,border:`1px solid ${t.acc}30`}}>
+            ⓘ How to read trend symbols
           </span>
           <span style={{fontSize:"9px",color:t.c2,fontWeight:600}}>TREND vs prior baseline:</span>
-          <span style={{display:"inline-flex",alignItems:"center",gap:"3px"}}><span style={{color:"#22c55e",fontWeight:700,fontSize:11}}>▲</span><span style={{fontSize:"9px",color:t.c2}}>Escalating</span></span>
+          <span style={{display:"inline-flex",alignItems:"center",gap:"3px"}}><span style={{color:"#ef4444",fontWeight:700,fontSize:11}}>▲</span><span style={{fontSize:"9px",color:t.c2}}>Escalating risk</span></span>
           <span style={{display:"inline-flex",alignItems:"center",gap:"3px"}}><span style={{color:"#3b82f6",fontWeight:700,fontSize:11}}>■</span><span style={{fontSize:"9px",color:t.c2}}>Stable</span></span>
-          <span style={{display:"inline-flex",alignItems:"center",gap:"3px"}}><span style={{color:"#ef4444",fontWeight:700,fontSize:11}}>▼</span><span style={{fontSize:"9px",color:t.c2}}>Declining</span></span>
+          <span style={{display:"inline-flex",alignItems:"center",gap:"3px"}}><span style={{color:"#22c55e",fontWeight:700,fontSize:11}}>▼</span><span style={{fontSize:"9px",color:t.c2}}>Declining risk</span></span>
           <span style={{display:"inline-flex",alignItems:"center",gap:"3px"}}><span style={{color:"#22c55e",fontWeight:700,fontSize:9,padding:"1px 4px",border:"1px solid #22c55e",borderRadius:6}}>NEW</span></span>
           <span style={{fontSize:"9px",color:t.c3,marginLeft:"6px"}}>Size=Risk · Click=details · Right-click=compare</span>
         </div>
@@ -1012,12 +1052,19 @@ export default function MobilityIntelligence(){
         const _nowLabel = new Date().toLocaleDateString("en-US", {month: "short", year: "numeric"}) + " (Now)";
         const tl=[{k:"jan25",l:"Jan 2025"},{k:"jan26",l:"Jan 2026"},{k:"mar26",l:_nowLabel}];
         const td=(()=>{
-          const m26=f.pos.mar26;
-          // Prefer jan26 as reference; fall back to jan25 for factors lacking 2026 anchor
-          const ref=f.pos.jan26||f.pos.jan25;
-          if(!ref||!m26)return"emerging";
-          const s1=ref[0]*ref[1],s2=m26[0]*m26[1];
-          return s2>s1*1.05?"escalating":s2<s1*0.95?"de-escalating":"stable";
+          const j26=f.pos.jan26,m26=f.pos.mar26;
+          // Prefer numeric delta when both anchors exist
+          if(j26 && m26){
+            const s1=j26[0]*j26[1],s2=m26[0]*m26[1];
+            if(s2>s1*1.05) return "escalating";
+            if(s2<s1*0.95) return "de-escalating";
+            return "stable";
+          }
+          // Fall back to LLM qualitative tag
+          const sLow = String(f.st||f.trend||"").toLowerCase();
+          if(sLow.includes("escalat") || sLow.includes("acceler") || sLow.includes("rising") || sLow.includes("growing") || sLow.includes("upcoming")) return "escalating";
+          if(sLow.includes("de-escalat") || sLow.includes("declin") || sLow.includes("fading") || sLow.includes("decreas")) return "de-escalating";
+          return "stable";
         })();
         const rl=score>=70?"Critical":score>=50?"High":score>=30?"Moderate":"Low";
         const affPils=f.pil||[];
@@ -1055,16 +1102,12 @@ export default function MobilityIntelligence(){
             <span style={{fontSize:"9px",padding:"2px 6px",borderRadius:"4px",background:td==="escalating"?"#ef444415":td==="de-escalating"?"#22c55e15":"#64748b15",color:td==="escalating"?"#ef4444":td==="de-escalating"?"#22c55e":"#64748b",fontWeight:600}}>{td==="escalating"?"↑ Escalating (vs Jan 2026)":td==="de-escalating"?"↓ De-escalating (vs Jan 2026)":"→ Stable (vs Jan 2026)"}</span>
           </div>
 
-          <div style={{padding:"8px",borderRadius:"8px",background:`${cc}08`,border:`1px solid ${cc}18`,marginBottom:"8px"}}>
-            <div style={{fontSize:"10px",color:cc,fontWeight:700,marginBottom:"3px"}}>◆ AI AGENT ANALYSIS · {SEGS[seg].s.toUpperCase()}</div>
-            <div style={{fontSize:"11px",color:t.c2,lineHeight:1.55}}>{note}</div>
-            <div style={{marginTop:"6px",fontSize:"11px",color:t.c2,lineHeight:1.55}}>
-              <strong style={{color:t.c}}>Strategic Implication:</strong>{" "}
-              {td==="escalating"?`Risk is escalating — score moved from ${f.pos.jan26?Math.round(f.pos.jan26[0]*f.pos.jan26[1]):"N/A"} to ${score}. Active contingency planning required for ${SEGS[seg].l}.`
-              :td==="de-escalating"?`Situation improving — score decreased from ${f.pos.jan26?Math.round(f.pos.jan26[0]*f.pos.jan26[1]):"N/A"} to ${score}. Continue monitoring but risk reducing for ${SEGS[seg].l}.`
-              :td==="emerging"?`Newly emerged factor. Building trajectory data. Monitor closely for ${SEGS[seg].l} impact.`
-              :`Score stable at ${score}. Maintain current positioning for ${SEGS[seg].l}.`}
-            </div>
+          <div style={{padding:"6px 8px",marginBottom:"6px",fontSize:"11px",color:td==="escalating"?"#ef4444":td==="de-escalating"?"#22c55e":t.c3,fontWeight:600}}>
+            <strong style={{color:t.c}}>Strategic Implication:</strong>{" "}
+            {td==="escalating"?`Risk escalating — L×I score ${f.pos.jan26?`moved from ${Math.round(f.pos.jan26[0]*f.pos.jan26[1])} to `:"now "}${score}. Active contingency planning required for ${SEGS[seg].l}.`
+            :td==="de-escalating"?`Risk declining — score ${f.pos.jan26?`decreased from ${Math.round(f.pos.jan26[0]*f.pos.jan26[1])} to `:"now "}${score}. Risk reducing for ${SEGS[seg].l}.`
+            :td==="emerging"?`Newly emerged factor. Building trajectory data. Monitor closely for ${SEGS[seg].l} impact.`
+            :`Score stable at ${score}. Maintain current positioning for ${SEGS[seg].l}.`}
           </div>
 
           <div style={{padding:"8px",borderRadius:"8px",background:t.btn,marginBottom:"8px"}}>
@@ -1160,7 +1203,7 @@ export default function MobilityIntelligence(){
               {aiAnalysis._meta?.model||"claude-sonnet-4-6"}{aiAnalysis._meta?.generated_at&&` · ${new Date(aiAnalysis._meta.generated_at).toLocaleString()}`}{aiAnalysis._from_cache&&" · ⚡ cached"}
             </div>
           </div>}
-          <button onClick={()=>{setV1Compare(p=>[...p,f.id]);setV1Sel(null);setAiAnalysis(null);}} style={{marginTop:"8px",width:"100%",padding:"6px",borderRadius:"6px",border:`1px solid ${t.acc}40`,background:`${t.acc}08`,color:t.acc,fontSize:"10px",fontWeight:600,cursor:"pointer"}}>+ Add to Timeline Compare</button>
+          <button onClick={()=>{if(v1Compare.length<3){setV1Compare(p=>[...p,f.id]);setV1Sel(null);setAiAnalysis(null);}}} title={v1Compare.length>=3?"Compare is capped at 3 factors — click Exit Compare to reset":"Right-click any bubble to add to compare"} style={{marginTop:"8px",width:"100%",padding:"6px",borderRadius:"6px",border:`1px solid ${v1Compare.length>=3?t.border:t.acc}40`,background:v1Compare.length>=3?t.btn:`${t.acc}08`,color:v1Compare.length>=3?t.c3:t.acc,fontSize:"10px",fontWeight:600,cursor:v1Compare.length>=3?"not-allowed":"pointer",opacity:v1Compare.length>=3?0.5:1}}>{v1Compare.length>=3?"Compare full (3/3) — Exit Compare to reset":"+ Add to Timeline Compare"}</button>
         </div>;})()}
     </div>);
   };
