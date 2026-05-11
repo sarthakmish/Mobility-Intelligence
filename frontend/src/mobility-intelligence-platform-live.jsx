@@ -677,22 +677,29 @@ export default function MobilityIntelligence(){
   },[PESTEL,seg]);
   const filtPestel=useMemo(()=>{
     let d=v1Cat==="all"?segPestel:segPestel.filter(f=>f.cat===v1Cat);
-    // ── Baseline filter: drop factors that didn't exist at the selected date
+    // ── Baseline filter: factor must have existed by the baseline date.
+    // PRIMARY check: origin_date. Falls back to is_foundational / pos data only when
+    // origin_date is missing (which should not happen after migration 015).
     if(v1Baseline==="jan25"){
-      // Include factors with explicit jan25 data OR factors that existed by Jan 2025
       const _jan25 = new Date("2025-01-15");
       d=d.filter(f=>{
-        if(f.pos?.jan25) return true;
+        if(f.originDate){
+          const od = new Date(f.originDate);
+          return od <= _jan25;
+        }
         if(f.isFoundational) return true;
-        if(f.originDate){const od=new Date(f.originDate); if(od<=_jan25) return true;}
+        if(f.pos?.jan25) return true;
         return false;
       });
     }else if(v1Baseline==="jan26"){
       const _jan26 = new Date("2026-01-15");
       d=d.filter(f=>{
-        if(f.pos?.jan26) return true;
+        if(f.originDate){
+          const od = new Date(f.originDate);
+          return od <= _jan26;
+        }
         if(f.isFoundational) return true;
-        if(f.originDate){const od=new Date(f.originDate); if(od<=_jan26) return true;}
+        if(f.pos?.jan26) return true;
         return false;
       });
     }
