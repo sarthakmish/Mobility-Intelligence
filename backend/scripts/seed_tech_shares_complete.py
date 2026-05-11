@@ -32,12 +32,14 @@ Run:
 import asyncio
 import sys
 import os
+import hashlib
 import asyncpg
 import json
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 APPLY = "--apply" in sys.argv
+FORCE = "--force" in sys.argv
 import os
 DB_URL = os.environ.get("DATABASE_URL", "postgresql://postgres:sarthak@localhost:5432/mobility_intelligence").replace("postgresql+asyncpg://", "postgresql://")
 
@@ -85,8 +87,11 @@ async def main():
         skipped_no_pillar_data = 0
         skipped_zero_market = 0
 
+        # Buffer: list of rows keyed by (tech_code, segment) so we can
+        # renormalize before insert.
+        buffer = {}
+
         for tech in techs:
-            # Parse market_data to know which segments matter for this tech
             md_raw = tech["market_data"]
             if not md_raw:
                 continue
@@ -99,18 +104,20 @@ async def main():
                     skipped_zero_market += 1
                     continue
 
-                # Look up pillar shares for this segment
                 comps = by_pillar_seg.get((tech["pillar"], seg))
                 if not comps:
                     skipped_no_pillar_data += 1
                     continue
 
-                # Maturity adjustment: amplify leaders for growth, boost emerging suppliers for emerging tech
                 maturity = (tech["maturity"] or "growth").lower()
+                buffer_key = (tech["code"], seg)
+                buffer[buffer_key] = []
 
                 for comp in comps:
-                    key = (comp["competitor_code"], tech["code"], seg)
-                    if key in existing_keys:
+                    insert_key = (comp["competitor_code"], tech["code"], seg)
+                    # When FORCE is set, we re-derive everything and rely on
+                    # ON CONFLICT DO UPDATE WHERE confidence='derived' below.
+                    if insert_key in existing_keys and not FORCE:
                         skipped_existing += 1
                         continue
 
@@ -118,56 +125,84 @@ async def main():
                     if base_share <= 0:
                         continue
 
-                    # Apply maturity modulation:
-                    if maturity == "emerging":
-                        # Emerging tech: smaller players get +20%, leaders get -10%
-                        if base_share >= 20:
-                            adj_share = base_share * 0.9
-                        else:
-                            adj_share = base_share * 1.2
-                    elif maturity in ("growth", "growing"):
-                        # Growth tech: leaders amplified slightly
-                        if base_share >= 20:
-                            adj_share = base_share * 1.05
-                        else:
-                            adj_share = base_share * 0.97
-                    else:  # mature, declining, etc.
-                        adj_share = base_share
+                    # ── Per-tech hash variance ─────────────────────────
+                    # Deterministic hash of (tech_code, competitor_code) →
+                    # stable variance in range [-30%, +30%] of base share.
+                    # Same tech+competitor pair always produces same share.
+                    hash_input = f"{tech['code']}|{comp['competitor_code']}".encode("utf-8")
+                    hash_int = int(hashlib.md5(hash_input).hexdigest()[:8], 16)
+                    variance_factor = ((hash_int % 1000) / 1000.0 - 0.5) * 0.6
 
-                    # Cap at 60% (no single supplier owns >60% of any tech in our model)
+                    # ── Maturity modulation (independent of variance) ──
+                    if maturity == "emerging":
+                        maturity_mult = 0.9 if base_share >= 20 else 1.2
+                    elif maturity in ("growth", "growing"):
+                        maturity_mult = 1.05 if base_share >= 20 else 0.97
+                    else:
+                        maturity_mult = 1.0
+
+                    adj_share = base_share * maturity_mult * (1.0 + variance_factor)
+
+                    if adj_share < 0.5:
+                        continue
                     adj_share = min(60.0, adj_share)
 
-                    # Revenue derived: tech's segment market × adjusted share
-                    rev = float(fy25) * adj_share / 100.0
+                    src_note = (
+                        f"Derived: pillar share {base_share:.1f}% in "
+                        f"{tech['pillar']} {seg}, adjusted for {maturity} "
+                        f"maturity, per-tech variance {variance_factor*100:+.1f}%"
+                    )
+                    buffer[buffer_key].append({
+                        "competitor_code": comp["competitor_code"],
+                        "raw_share": adj_share,
+                        "fy25": fy25,
+                        "src_note": src_note,
+                    })
 
-                    # Strength label
-                    if adj_share >= 25:
-                        strength = "market_leader"
-                    elif adj_share >= 12:
-                        strength = "strong_presence"
-                    elif adj_share >= 5:
-                        strength = "present"
-                    else:
-                        strength = "emerging"
+        # ── Renormalize: each (tech, segment) bucket sums to <= 100% ──
+        # If sum > 100%, scale down proportionally. If sum < 100%, leave gaps
+        # (represents un-attributed "others" / fragmented long-tail).
+        print(f"  Buffered {sum(len(v) for v in buffer.values())} raw rows across "
+              f"{len(buffer)} (tech, segment) buckets - renormalizing...")
 
-                    src_note = (f"Derived: pillar share {base_share:.1f}% "
-                                f"x {tech['pillar']} {seg} weight, "
-                                f"adjusted for {maturity} maturity")
+        for buffer_key, rows in buffer.items():
+            tech_code, seg = buffer_key
+            total = sum(r["raw_share"] for r in rows)
+            if total > 100.0:
+                scale = 100.0 / total
+                for r in rows:
+                    r["raw_share"] *= scale
 
-                    if APPLY:
-                        await conn.execute("""
-                            INSERT INTO competitor_tech_shares
-                                (competitor_code, tech_code, segment,
-                                 market_share_pct, revenue_cr, strength,
-                                 confidence, source_note)
-                            VALUES ($1, $2, $3, $4, $5, $6, 'derived', $7)
-                            ON CONFLICT (competitor_code, tech_code, segment)
-                            DO NOTHING
-                        """,
-                            comp["competitor_code"], tech["code"], seg,
-                            round(adj_share, 1), round(rev, 1),
-                            strength, src_note)
-                    added += 1
+            for r in rows:
+                final_share = round(r["raw_share"], 1)
+                rev = round(r["fy25"] * final_share / 100.0, 1)
+                if final_share >= 25:
+                    strength = "market_leader"
+                elif final_share >= 12:
+                    strength = "strong_presence"
+                elif final_share >= 5:
+                    strength = "present"
+                else:
+                    strength = "emerging"
+
+                if APPLY:
+                    await conn.execute("""
+                        INSERT INTO competitor_tech_shares
+                            (competitor_code, tech_code, segment,
+                             market_share_pct, revenue_cr, strength,
+                             confidence, source_note)
+                        VALUES ($1, $2, $3, $4, $5, $6, 'derived', $7)
+                        ON CONFLICT (competitor_code, tech_code, segment)
+                        DO UPDATE SET
+                            market_share_pct = EXCLUDED.market_share_pct,
+                            revenue_cr = EXCLUDED.revenue_cr,
+                            strength = EXCLUDED.strength,
+                            source_note = EXCLUDED.source_note
+                        WHERE competitor_tech_shares.confidence = 'derived'
+                    """,
+                        r["competitor_code"], tech_code, seg,
+                        final_share, rev, strength, r["src_note"])
+                added += 1
 
         # Summary
         print()
