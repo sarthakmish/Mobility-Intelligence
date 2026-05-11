@@ -42,11 +42,14 @@ async def get_all_pestel_factors(
             f.first_seen_date, f.last_confirmed_date, f.confirmation_count,
             CASE
                 WHEN f.is_foundational = TRUE THEN 'ESTABLISHED'
+                WHEN f.category IN ('L', 'P') AND f.origin_date IS NOT NULL
+                     AND f.origin_date <= NOW()::date THEN 'ESTABLISHED'
                 WHEN f.first_seen_date > NOW() - INTERVAL '7 days' THEN 'FRESH'
                 WHEN COALESCE(f.confirmation_count, 1) >= 3 THEN 'ESTABLISHED'
-                WHEN f.category NOT IN ('L') AND f.is_foundational IS NOT TRUE
+                WHEN f.category NOT IN ('L', 'P', 'En') AND f.is_foundational IS NOT TRUE
                      AND COALESCE(f.last_confirmed_date, f.last_refreshed) < NOW() - INTERVAL '30 days' THEN 'FADING'
                 WHEN COALESCE(f.confirmation_count, 1) = 1
+                     AND f.category NOT IN ('L', 'P', 'En') AND f.is_foundational IS NOT TRUE
                      AND COALESCE(f.last_confirmed_date, f.last_refreshed) < NOW() - INTERVAL '14 days'
                      THEN 'DECAYING'
                 ELSE 'EMERGING'

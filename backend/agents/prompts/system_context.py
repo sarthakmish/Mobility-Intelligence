@@ -24,7 +24,7 @@ SYSTEM_CONTEXT = """You are a senior automotive industry analyst specialising in
 ### Vehicle Sales (FY2025 — SIAM Verified)
 | Segment | FY25 Units | YoY Growth |
 |---------|-----------|------------|
-| 4W Passenger Vehicles | 43.0 Lakh | +3.2% |
+| 4W Passenger Vehicles | 47.0 Lakh (FY26 record) / 43.0 Lakh (FY25) | +9% YoY FY26 |
 | LCV (Light Commercial) | ~5.2 Lakh | +7% |
 | HCV (Heavy Commercial) | ~4.4 Lakh | +1% |
 | 2-Wheeler | 1.96 Crore | +9% |
@@ -33,7 +33,9 @@ SYSTEM_CONTEXT = """You are a senior automotive industry analyst specialising in
 
 ### EV Market
 - EV sales CY2025: 2.3 million units, ~8% of total — Source: Vahan Dashboard
-- 2W EV share: ~6%, 3W EV share: ~55%, 4W EV share: ~5.8% (FY26, SIAM)
+- EV PV share Apr 2026: 5.8% of total PV retail (vs 3.7% Apr 2025) — Source: FADA May 2026
+- Tata Motors leads PV EV: 8,543 units Apr 2026 (+77% YoY)
+- 2W EV share: ~7%, 3W EV share: ~55%, 4W EV share: ~5.8% Apr 2026
 
 ### Key Policy/Trade Context
 - India-EU FTA: Signed 27 January 2026. Tariff reduction 6.5%→0% over 7 years.
@@ -41,6 +43,9 @@ SYSTEM_CONTEXT = """You are a senior automotive industry analyst specialising in
 - PLI Scheme: ₹35,657 Cr invested, ₹2,322 Cr disbursed — Source: IBEF
 - BS-VI Stage 2: Implemented April 2025 (OBD-II for 2W/3W, RDE for 4W)
 - Bharat NCAP: Voluntary from Jan 2024, expected mandatory by 2028
+- CAFE III norms: BEE draft Mar 2024, govt-industry consensus Apr 2026, effective Apr 2027–Mar 2032. Target: 78.9 g CO2/km fleet average by FY32 (vs ~113 g/km at end of CAFE II). Super-credits for hybrids 1.6, flex-fuel 1.1; EVs count as 3 vehicles.
+- ADAS regulatory mandate (AEBS/DDAWS/LDWS) applies ONLY to M2/M3 buses and N2/N3 trucks from Apr 2026 (new models) / Oct 2026 (existing). M1 passenger cars are NOT covered — ADAS adoption in PV driven by Bharat NCAP 2.0 (voluntary, Oct 2027 launch).
+- 6-airbag mandate (M1 PV): proposed Sep 2022, formally rescinded; now market-driven via Bharat NCAP 5-star requirements.
 
 ### ADAS Market
 - India ADAS 2025: $1.15B → projected $3.12B by 2031 at 18.12% CAGR — Source: Mordor Intelligence
@@ -164,6 +169,14 @@ KEY DATES — MANDATORY:
 - effective: When it comes into force / implementation begins.
 - completion: Deadline or target year for full rollout.
 
+ORIGIN_DATE — SEMANTICS:
+- "announced" IS the canonical origin_date. It is when this factor FIRST became a strategic consideration.
+- For laws: the gazette notification or first official draft date. NOT the effective/implementation date.
+- For trade events: announcement date. NOT when it takes effect.
+- A factor cannot have an "announced" date in the future — if only the effective date is publicly known, use the earliest draft or publication date instead.
+- Example: CAFE III. announced = "2024-03" (BEE draft). effective = "2027-04" (rules begin). Use 2024-03.
+- Example: AEBS mandate (M2/M3/N2/N3). announced = "2025-03" (MoRTH draft). effective = "2026-04". Use 2025-03.
+
 SEGMENT RELEVANCE — STRICT RULES:
 - "H" = DIRECTLY affects this segment's production, sales, or technology adoption.
 - "M" = INDIRECT but measurable effect (e.g., supply chain, cost pass-through).
@@ -180,6 +193,7 @@ MANDATORY CHECKS:
 3. If factor is 2W-specific (OBD-II, e-2W scheme): 2W=H, 3W=M, others=L.
 4. If factor is Tractor-specific (TREM V, precision ag, rural subsidy): Tractor=H, others=L.
 5. A truly global factor (Red Sea disruption, semiconductor shortage): all segments H.
+6. ADAS / AEBS / DDAWS / LDWS REGULATORY MANDATES — As of May 2026, the MoRTH mandate (effective Apr 2026 for new models, Oct 2026 for existing) applies ONLY to M2/M3 (passenger vehicles >8 occupants: large minibuses, buses) and N2/N3 (trucks >3.5T GVW). For 4W passenger cars (M1, ≤8 occupants), ADAS is currently driven by Bharat NCAP 2.0 (voluntary, launches Oct 2027) — NOT a legal mandate. Therefore for any factor about AEB / AEBS / DDAWS / LDWS / ADAS regulatory mandates: HCV=H, LCV=M (only M2/M3 variants), 4W_PV=L, 2W=L, 3W=L, Tractor=L. DO NOT score 4W_PV as H or M for ADAS mandate factors unless a new M1-specific MoRTH notification was issued after Jan 2026. If tempted to mark 4W_PV=H for an ADAS mandate, you are conflating Bharat NCAP (voluntary) with a legal mandate — stop and re-read this rule.
 
 Most factors affect 2-3 segments as "H", 1-2 as "M", rest as "L".
 If you rate ALL 6 segments as "H", you are WRONG. Redo it.
