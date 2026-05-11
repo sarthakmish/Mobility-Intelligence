@@ -38,6 +38,7 @@ async def get_all_pestel_factors(
             f.segment_relevance, f.affected_pillars,
             f.source_ids, f.last_refreshed,
             f.origin_date, f.is_foundational,
+            f.key_dates,
             f.verification_verdict, f.verification_source,
             f.first_seen_date, f.last_confirmed_date, f.confirmation_count,
             CASE
@@ -86,6 +87,7 @@ async def get_all_pestel_factors(
             f.source_ids, f.last_refreshed,
             NULL::date AS origin_date,
             FALSE AS is_foundational,
+            NULL::jsonb AS key_dates,
             'UNVERIFIED' AS verification_verdict,
             '' AS verification_source,
             NULL::timestamptz AS first_seen_date,
@@ -121,6 +123,22 @@ async def get_all_pestel_factors(
                 pt = _json.loads(pt)
             return [float(pt["l"]), float(pt["i"])] if pt else None
 
+        # P13: prefer key_dates.announced as canonical timeline source
+        _kd = r.get("key_dates") or {}
+        if isinstance(_kd, str):
+            try:
+                _kd = _json.loads(_kd)
+            except Exception:
+                _kd = {}
+        _ann = _kd.get("announced", "") if isinstance(_kd, dict) else ""
+        if _ann and len(_ann) == 7:       # "YYYY-MM" → "YYYY-MM-01"
+            _ann = _ann + "-01"
+        elif _ann and len(_ann) == 4:     # "YYYY" → "YYYY-01-01"
+            _ann = _ann + "-01-01"
+        _origin_date_str = _ann if (len(_ann) >= 10) else (
+            r.get("origin_date").isoformat() if r.get("origin_date") else None
+        )
+
         factors.append({
             "id": r["id"],
             "code": r["code"],
@@ -137,7 +155,7 @@ async def get_all_pestel_factors(
             "affected_pillars": r["affected_pillars"],
             "relevance_to_segment": seg_rel.get(segment, "M"),
             "last_refreshed": r["last_refreshed"],
-            "origin_date": (r.get("origin_date").isoformat() if r.get("origin_date") else None),
+            "origin_date": _origin_date_str,
             "is_foundational": r.get("is_foundational", False),
             "verification_verdict": r.get("verification_verdict", "UNVERIFIED"),
             "verification_source": r.get("verification_source", ""),

@@ -1621,7 +1621,9 @@ export default function MobilityIntelligence(){
     const W=svgDim.w,H=svgDim.h;
     const pad={l:60,r:20,t:30,b:45};
     const iW=W-pad.l-pad.r,iH=H-pad.t-pad.b;
-    const mxS=Math.max(...data.map(d=>Math.round(d.segSz*Math.pow(1+d.cagr/100,yrs))),1)*1.15;
+    // P12: anchor mxS to FY2030 so bubbles visibly grow as slider advances
+    const _FIX_YEAR=2030;const _fixYrs=_FIX_YEAR-2025;
+    const mxS=Math.max(...data.map(d=>Math.round(d.segSz*Math.pow(1+d.cagr/100,_fixYrs))),1)*1.15;
     const mxC=Math.max(...data.map(d=>d.cagr),1)*1.15;
     const mnC=Math.min(0,...data.map(d=>d.cagr));
     const sx=v=>pad.l+(v/mxS)*iW;const sy=v=>pad.t+iH-((v-mnC)/(mxC-mnC))*iH;
@@ -1760,7 +1762,7 @@ export default function MobilityIntelligence(){
             </svg>
           </div>
           <div style={{marginTop:"10px",fontSize:"11px",color:t.c3,fontWeight:600,marginBottom:"2px"}}>RANKED BY PROJECTED SIZE {v3Year>2025?`(${v3Year})`:""} · {v3P==="all"?"All":PM[v3P]?.label} · {SEGS[seg].s}</div>
-          <div style={{fontSize:"9px",color:t.c3,fontStyle:"italic",fontWeight:400,marginBottom:"4px"}}>{v3Top>0&&v3Stage==="all"?`Top ${v3Top} (Declining excluded — select Declining filter to see them)`:v3Top>0?`Top ${v3Top} within ${v3Stage}`:""}</div>
+          <div style={{fontSize:"9px",color:t.c3,fontStyle:"italic",fontWeight:400,marginBottom:"4px"}}>{v3Top>0&&v3Stage==="all"?`Top ${v3Top} (Declining excluded — select Declining filter to see them)`:v3Top>0?`Top ${v3Top} within ${v3Stage}`:""}<span style={{marginLeft:6,opacity:.7}}>Bubble size scaled to FY2030 max — slide to see growth</span></div>
           <div style={{display:"flex",flexDirection:"column",gap:"2px"}}>
             {bubbles.slice(0,15).map((d,i)=>{const pl=PM[d.p];const mx=bubbles[0]?.projSz||1;
               return <div key={i} onClick={()=>{setV3T(d);setAiAnalysis(null);if(d._code)fetchTechAnalysis(d._code);}} style={{display:"flex",alignItems:"center",gap:"6px",padding:"4px 6px",borderRadius:"5px",cursor:"pointer",background:v3T?.n===d.n?`${pl?.color}08`:undefined,border:v3T?.n===d.n?`1px solid ${pl?.color}25`:"1px solid transparent"}}>
