@@ -25,13 +25,17 @@ async def get_pillar_competitors(
         {"pillar": pillar, "seg": segment},
     )
 
+    # market_data may store segments as nested {"fy25":X,"cagr":Y} OR as a flat number X.
+    # Try nested first, fall back to flat number so both formats work correctly.
     techs = await db.execute(
         text(
             "SELECT code, name, "
-            "COALESCE((market_data->:seg->>'fy25')::numeric, 0) as fy25, "
+            "COALESCE((market_data->:seg->>'fy25')::numeric, "
+            "         (market_data->>:seg)::numeric, 0) as fy25, "
             "COALESCE(cagr, 0) as cagr, maturity, confidence, source_note "
             "FROM technologies WHERE pillar = :pillar AND is_active = TRUE "
-            "AND COALESCE((market_data->:seg->>'fy25')::numeric, 0) > 0 "
+            "AND COALESCE((market_data->:seg->>'fy25')::numeric, "
+            "             (market_data->>:seg)::numeric, 0) > 0 "
             "ORDER BY fy25 DESC"
         ),
         {"seg": segment, "pillar": pillar},
