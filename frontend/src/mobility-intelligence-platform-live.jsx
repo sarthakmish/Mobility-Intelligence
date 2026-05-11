@@ -725,7 +725,14 @@ export default function MobilityIntelligence(){
     const lkRange=lkMax-lkMin||1;const impRange=impMax-impMin||1;
     const sx=(v)=>pad.l+((v-lkMin)/lkRange)*iW;
     const sy=(v)=>H-pad.b-((v-impMin)/impRange)*iH;
-    const getR=f=>{const p=f.pos.mar26||f.pos.jan26;if(!p)return 10;return Math.max(9,Math.min(26,7+p[0]*p[1]/5));};
+    // Bubble radius — baseline-aware so historical views show historical risk sizes
+    const getR=(f, pOverride)=>{
+      const p = pOverride || (v1Baseline==="jan25" ? (f.pos.jan25||f.pos.jan26||f.pos.mar26)
+                            : v1Baseline==="jan26" ? (f.pos.jan26||f.pos.jan25||f.pos.mar26)
+                            : (f.pos.mar26||f.pos.jan26));
+      if(!p) return 10;
+      return Math.max(9, Math.min(26, 7 + p[0]*p[1]/5));
+    };
 
     // Baseline-aware position lookup
     const _posForBaseline=(f)=>{
@@ -741,7 +748,7 @@ export default function MobilityIntelligence(){
     let bubbles=filtPestel.map(f=>{
       const p=_posForBaseline(f);
       if(!p) return null;
-      return{...f,cx:sx(p[0]),cy:sy(p[1]),r:getR({...f,pos:{...f.pos,mar26:p}}),lk:p[0],imp:p[1],_baselinePos:p};
+      return{...f, cx:sx(p[0]), cy:sy(p[1]), r:getR(f, p), lk:p[0], imp:p[1], _baselinePos:p};
     }).filter(Boolean);
     // Strong repulsion: 40 passes, include label height in effective radius
     for(let pass=0;pass<40;pass++){for(let i=0;i<bubbles.length;i++){for(let j=i+1;j<bubbles.length;j++){
@@ -825,14 +832,35 @@ export default function MobilityIntelligence(){
         pts.push({label:`Emerged ${m}`, pos:nowPos, kind:"emerged"});
       }
 
-      // 4. NOW — always present; suppress if too close to last point
+      // 4. NOW — always present
       if (nowPos) {
-        const lastPt = pts[pts.length-1];
-        const tooClose = lastPt && Math.abs(lastPt.pos[0]-nowPos[0])<0.2 && Math.abs(lastPt.pos[1]-nowPos[1])<0.2;
-        if (!tooClose) pts.push({label:_nowMonth, pos:nowPos, kind:"now"});
+        pts.push({label:_nowMonth, pos:nowPos, kind:"now"});
       }
 
-      return{f,pts};
+      // De-duplicate: collapse anchors that are visually identical (delta < 0.3 in both axes).
+      // Keep Origin and Now always; drop middle anchors that overlap any kept anchor.
+      const deduped = [];
+      for(let i=0; i<pts.length; i++){
+        const p = pts[i];
+        if(p.kind === "origin" || p.kind === "now"){
+          deduped.push(p);
+          continue;
+        }
+        const tooClose = deduped.some(kept =>
+          Math.abs(kept.pos[0]-p.pos[0])<0.3 && Math.abs(kept.pos[1]-p.pos[1])<0.3
+        );
+        if(!tooClose) deduped.push(p);
+      }
+      // If Origin and Now are identical (very stable/new factor), drop Origin
+      if(deduped.length >= 2){
+        const first = deduped[0], last = deduped[deduped.length-1];
+        if(first.kind==="origin" && last.kind==="now" &&
+           Math.abs(first.pos[0]-last.pos[0])<0.3 && Math.abs(first.pos[1]-last.pos[1])<0.3){
+          deduped.shift();
+        }
+      }
+
+      return{f, pts: deduped};
     }).filter(Boolean);
 
     return(<div style={{display:"flex",gap:"14px",overflow:"hidden"}}>
@@ -871,7 +899,12 @@ export default function MobilityIntelligence(){
           {v1Baseline!=="now" && <span style={{fontSize:"9px",color:"#f59e0b",fontStyle:"italic",marginLeft:"4px"}}>
             ⚠ Historical view ({v1Baseline==="jan25"?"Jan 2025":"Jan 2026"}) — factors emerged after this date hidden. Trend symbols compare this baseline to the prior year.
           </span>}
-          {isCompare&&<button onClick={()=>setV1Compare([])} style={{marginLeft:"auto",padding:"4px 10px",borderRadius:"5px",border:`1px solid ${t.acc}`,background:`${t.acc}18`,color:t.acc,fontSize:"10px",cursor:"pointer",fontWeight:600}}>✕ Exit Compare ({v1Compare.length})</button>}
+          {isCompare&&<>
+            <span style={{marginLeft:"auto",fontSize:"10px",color:v1Compare.length>=3?"#f59e0b":t.c3,fontStyle:"italic"}}>
+              {v1Compare.length>=3?"Max 3 factors — remove one to add another":`${v1Compare.length}/3 selected`}
+            </span>
+            <button onClick={()=>setV1Compare([])} style={{padding:"4px 10px",borderRadius:"5px",border:`1px solid ${t.acc}`,background:`${t.acc}18`,color:t.acc,fontSize:"10px",cursor:"pointer",fontWeight:600}}>✕ Exit Compare ({v1Compare.length})</button>
+          </>}
         </div>
 
         {/* Empty-state when historical baseline shows zero factors */}
@@ -1152,6 +1185,7 @@ export default function MobilityIntelligence(){
           <div style={{fontSize:"9px",color:t.c3,marginTop:"6px"}}>Source: {f.src}</div>
           {aiLoading&&<div style={{padding:"12px",textAlign:"center",color:t.c3,fontSize:"11px"}}>⏳ Generating AI analysis via Claude Sonnet 4.6...</div>}
           {aiAnalysis&&!aiLoading&&<div style={{marginTop:"10px",padding:"12px",borderRadius:"8px",border:`1px solid ${t.border}`,background:`${t.acc}05`}}>
+            <div style={{fontSize:"10px",color:t.acc,fontWeight:700,marginBottom:"6px",letterSpacing:"0.04em"}}>◆ AI AGENT ANALYSIS · {SEGS[seg].s.toUpperCase()}</div>
             {/* Summary */}
             {(aiAnalysis.summary||aiAnalysis.strategic_outlook)&&(
               <div style={{fontSize:"11px",color:t.c,lineHeight:"1.6",marginBottom:"10px"}}>{aiAnalysis.summary||aiAnalysis.strategic_outlook}</div>
