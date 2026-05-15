@@ -1,8 +1,11 @@
 """Quick probe to test LLM Farm connectivity directly."""
+import os
 import httpx
 
-API_KEY = "9c93482a1c6b4581b4f88071d86e8f0f"
-BASE = "https://aoai-farm.bosch-temp.com"
+API_KEY = os.environ.get("LLM_FARM_API_KEY")
+if not API_KEY:
+    raise RuntimeError("LLM_FARM_API_KEY env var not set. Run: set LLM_FARM_API_KEY=<your_key>")
+BASE = os.environ.get("LLM_FARM_BASE_URL", "https://aoai-farm.bosch-temp.com")
 
 tests = [
     {
