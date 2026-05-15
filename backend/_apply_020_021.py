@@ -1,7 +1,9 @@
-import asyncio, asyncpg
+import asyncio, asyncpg, os
+
+_DEFAULT_DB = "postgresql://postgres:postgres@localhost:5432/mobility_intelligence"
 
 async def main():
-    c = await asyncpg.connect("postgresql://postgres:sarthak@localhost:5432/mobility_intelligence")
+    c = await asyncpg.connect(os.environ.get("DATABASE_URL", _DEFAULT_DB).replace("postgresql+asyncpg://", "postgresql://"))
     
     for mig in ["020_fix_ev_aggregate_factor.sql", "021_sync_origin_with_key_dates.sql"]:
         sql = open(f"db/migrations/{mig}").read()

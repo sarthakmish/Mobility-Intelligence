@@ -1,4 +1,4 @@
-# Mobility Solutions Intelligence Platform
+# Mobility Intelligence Platform
 ## Comprehensive Technical Overview
 
 > **Bosch Mobility Solutions — India Automotive Intelligence**  
@@ -26,7 +26,7 @@
 
 ## 1. Executive Summary
 
-The **Mobility Solutions Intelligence Platform** is an agentic AI system purpose-built for Bosch Mobility's India operations. It continuously monitors India's automotive component market across **6 vehicle segments** and **13 technology pillars**, surfacing PESTEL risks and technology opportunity signals in near real-time.
+The **Mobility Intelligence Platform** is an agentic AI system purpose-built for Bosch Mobility's India operations. It continuously monitors India's automotive component market across **6 vehicle segments** and **13 technology pillars**, surfacing PESTEL risks and technology opportunity signals in near real-time.
 
 ### What it replaces and augments
 

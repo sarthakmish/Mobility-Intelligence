@@ -24,7 +24,7 @@ import asyncpg
 APPLY = "--apply" in sys.argv
 
 import os
-DB_URL = os.environ.get("DATABASE_URL", "postgresql://postgres:sarthak@localhost:5432/mobility_intelligence").replace("postgresql+asyncpg://", "postgresql://")
+DB_URL = os.environ.get("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/mobility_intelligence").replace("postgresql+asyncpg://", "postgresql://")
 
 # Segments to seed for (skip Tractor for most pillars — lower relevance)
 ALL_SEGS = ["4W_PV", "LCV", "HCV", "2W", "3W", "Tractor"]

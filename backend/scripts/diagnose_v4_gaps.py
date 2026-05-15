@@ -19,7 +19,7 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import asyncpg
 
-DB_URL = "postgresql://postgres:sarthak@localhost:5432/mobility_intelligence"
+DB_URL = os.environ.get("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/mobility_intelligence").replace("postgresql+asyncpg://", "postgresql://")
 
 PILLARS = [
     "ADAS", "Motion", "Energy", "Body & Comfort", "Infotainment",

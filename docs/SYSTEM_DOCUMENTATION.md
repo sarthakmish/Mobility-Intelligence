@@ -1,4 +1,4 @@
-# Mobility Solutions Intelligence Platform — System Documentation
+# Mobility Intelligence Platform — System Documentation
 
 **Version:** 1.0  
 **Date:** March 2026  
@@ -29,7 +29,7 @@
 
 ## 1. Executive Summary
 
-The Mobility Solutions Intelligence Platform is an internal analytics tool that aggregates market intelligence about India's automotive component industry and presents it to Bosch strategic decision-makers through an interactive web dashboard.
+The Mobility Intelligence Platform is an internal analytics tool that aggregates market intelligence about India's automotive component industry and presents it to Bosch strategic decision-makers through an interactive web dashboard.
 
 **What it does:**
 - Monitors 6 public web sources for industry news every 24 hours (daily)
@@ -617,5 +617,5 @@ This platform is an **intelligence aggregation tool**. All AI outputs are:
 
 ---
 
-*Document maintained by the Bosch Mobility Solutions Intelligence Platform team.*  
+*Document maintained by the Bosch Mobility Intelligence Platform team.*  
 *For questions: refer to the `docs/ARCHITECTURE.md` for implementation detail, or the source code — every module has inline documentation.*

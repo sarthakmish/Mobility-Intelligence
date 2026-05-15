@@ -1,6 +1,6 @@
 """
 ============================================================
-MOBILITY SOLUTIONS INTELLIGENCE PLATFORM — API Entry Point
+MOBILITY INTELLIGENCE PLATFORM — API Entry Point
 ============================================================
 This is the MAIN file. Everything starts here.
 
@@ -66,7 +66,7 @@ async def lifespan(app: FastAPI):
     """
     # ── STARTUP ──────────────────────────────────────────
     logger.info("╔══════════════════════════════════════════════════╗")
-    logger.info("║  MOBILITY SOLUTIONS INTELLIGENCE PLATFORM        ║")
+    logger.info("║  MOBILITY INTELLIGENCE PLATFORM                  ║")
     logger.info("║  Starting up...                                  ║")
     logger.info("╚══════════════════════════════════════════════════╝")
 
@@ -179,7 +179,7 @@ async def lifespan(app: FastAPI):
 # CREATE THE FASTAPI APP
 # ════════════════════════════════════════════════════════════
 app = FastAPI(
-    title="Mobility Solutions Intelligence API",
+    title="Mobility Intelligence API",
     description=(
         "Agentic AI platform for India's automotive component industry. "
         "Provides PESTEL analysis, technology intelligence, and market sizing "

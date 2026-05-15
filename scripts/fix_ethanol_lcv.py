@@ -1,9 +1,12 @@
 import asyncio
 import asyncpg
+import os
+
+_DEFAULT_DB = "postgresql://postgres:postgres@localhost:5432/mobility_intelligence"
 
 async def run():
     conn = await asyncpg.connect(
-        "postgresql://postgres:sarthak@localhost:5432/mobility_intelligence"
+        os.environ.get("DATABASE_URL", _DEFAULT_DB).replace("postgresql+asyncpg://", "postgresql://")
     )
     r = await conn.execute(
         "UPDATE pestel_factors SET segment_relevance = "

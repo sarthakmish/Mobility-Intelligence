@@ -1,4 +1,4 @@
-# Mobility Solutions Intelligence Platform — Full Stack Architecture
+# Mobility Intelligence Platform — Full Stack Architecture
 
 ## Table of Contents
 1. [Architecture Decisions](#architecture-decisions)

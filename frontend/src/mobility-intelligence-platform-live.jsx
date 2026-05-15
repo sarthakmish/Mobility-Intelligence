@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
-   MOBILITY SOLUTIONS INTELLIGENCE PLATFORM v3
+   MOBILITY INTELLIGENCE PLATFORM v3
    Live API-connected — Leadership-grade
    ═══════════════════════════════════════════════════════════════ */
 
@@ -2407,7 +2407,7 @@ export default function MobilityIntelligence(){
       <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:"14px",flexWrap:"wrap",gap:"6px"}}>
         <div>
-          <h1 style={{margin:0,fontSize:"21px",fontWeight:700,letterSpacing:"-0.02em"}}>Mobility Solutions Intelligence</h1>
+          <h1 style={{margin:0,fontSize:"21px",fontWeight:700,letterSpacing:"-0.02em"}}>Mobility Intelligence</h1>
           <div style={{fontSize:"11px",color:t.c2,marginTop:"2px"}}>Indian Auto Component Industry · {curr==="INR"?"₹6.73 Lakh Crore ($80.2B)":"€75.6B ($80.2B)"} FY25 · ACMA Verified · Showing: <strong style={{color:t.acc}}>{SEGS[seg].l}</strong> · {SEGS[seg].u} · {SEGS[seg].src} · <span style={{padding:"2px 6px",borderRadius:"4px",fontSize:"9px",fontWeight:700,background:apiStatus==="live"?"#22c55e20":"#f9731620",color:apiStatus==="live"?"#22c55e":"#f97316",border:`1px solid ${apiStatus==="live"?"#22c55e40":"#f9731640"}`}}>{apiStatus==="live"?`● LIVE API${lastRefresh?" · "+lastRefresh:""}`:apiStatus==="loading"?"◌ Connecting...":"○ Offline — Fallback Data"}</span></div>
         </div>
         <div style={{display:"flex",gap:"4px",alignItems:"center",flexWrap:"wrap"}}>

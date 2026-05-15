@@ -1,6 +1,7 @@
 """SQL schema + backfill for competitor tables and score history."""
 import asyncio
 import asyncpg
+import os
 
 SQL = """
 CREATE TABLE IF NOT EXISTS competitors (
@@ -73,7 +74,7 @@ ON CONFLICT DO NOTHING;
 
 async def run():
     conn = await asyncpg.connect(
-        "postgresql://postgres:sarthak@localhost:5432/mobility_intelligence"
+        os.environ.get("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/mobility_intelligence").replace("postgresql+asyncpg://", "postgresql://")
     )
     await conn.execute(SQL)
     print("Tables created.")

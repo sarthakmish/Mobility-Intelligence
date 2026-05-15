@@ -26,7 +26,7 @@ import json
 import sys
 from datetime import date, timedelta
 
-DB_URL = "postgresql://postgres:sarthak@localhost:5432/mobility_intelligence"
+DB_URL = os.environ.get("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/mobility_intelligence").replace("postgresql+asyncpg://", "postgresql://")
 SEGS   = ["4W_PV", "2W", "3W", "HCV", "LCV", "Tractor"]
 
 # ─────────────────────────────────────────────────────────────────────────────

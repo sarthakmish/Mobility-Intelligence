@@ -7,8 +7,11 @@ import psycopg2.extras
 import json
 import math
 
-DB = dict(host="localhost", port=5432, dbname="mobility_intelligence",
-          user="postgres", password="sarthak")
+import os as _os, urllib.parse as _up
+_db_url = _os.environ.get("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/mobility_intelligence").replace("postgresql+asyncpg://", "postgresql://")
+_p = _up.urlparse(_db_url)
+DB = dict(host=_p.hostname, port=_p.port or 5432, dbname=_p.path.lstrip("/"),
+          user=_p.username, password=_p.password)
 
 SEGMENTS = ["4W_PV", "2W", "3W", "LCV", "HCV", "Tractor"]
 

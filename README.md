@@ -1,4 +1,4 @@
-# Mobility Solutions Intelligence Platform
+# Mobility Intelligence Platform
 
 Agentic AI dashboard for Bosch India auto-component industry intelligence.
 

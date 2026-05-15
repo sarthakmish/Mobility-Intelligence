@@ -1,4 +1,4 @@
-# Mobility Solutions Intelligence Platform
+# Mobility Intelligence Platform
 ## Full Technical Architecture & Operations Guide
 ### Prepared for: Cloud Deployment, Stress Testing & Internal Hosting Review
 ### Date: April 2026 | Status: Production-ready (v3)
@@ -30,7 +30,7 @@
 
 ## 1. System Overview
 
-**Product name:** Mobility Solutions Intelligence Platform
+**Product name:** Mobility Intelligence Platform
 **Purpose:** An agentic AI dashboard providing strategic market intelligence for India's automotive component industry. Covers Bosch Mobility Solutions' 13 technology pillars across 6 vehicle segments.
 
 **What it does:**

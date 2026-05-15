@@ -1,6 +1,7 @@
 """One-shot script to fix segment_relevance and dedup pestel_factors."""
 import asyncio
 import asyncpg
+import os
 
 SQL_FIXES = [
     (
@@ -122,9 +123,8 @@ ORDER BY (likelihood * impact) DESC;
 
 
 async def run():
-    conn = await asyncpg.connect(
-        "postgresql://postgres:sarthak@localhost:5432/mobility_intelligence"
-    )
+    _db = os.environ.get("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/mobility_intelligence").replace("postgresql+asyncpg://", "postgresql://")
+    conn = await asyncpg.connect(_db)
     total_rows = 0
     print("Running segment_relevance fixes...\n")
     for sql, label in SQL_FIXES:
